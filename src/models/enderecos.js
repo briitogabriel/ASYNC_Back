@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     end_logradouro: DataTypes.STRING
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'Enderecos',
   });
   return Enderecos;

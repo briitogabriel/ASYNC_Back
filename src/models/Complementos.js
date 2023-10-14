@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     comp_ponto_referencia: DataTypes.STRING,
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'Complementos',
   });
   return Complementos;

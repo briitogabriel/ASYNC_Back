@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     exa_status: DataTypes.BOOLEAN,
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'Exames',
   });
   return Exames;

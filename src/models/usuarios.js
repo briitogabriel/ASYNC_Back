@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     usu_campo_busca: DataTypes.STRING
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'Usuarios',
   });
   return Usuarios;

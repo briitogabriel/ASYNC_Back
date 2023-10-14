@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     die_status: DataTypes.BOOLEAN,
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'Dietas',
   });
   return Dietas;

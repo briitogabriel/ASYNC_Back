@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     pac_status: DataTypes.BOOLEAN
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'Pacientes',
   });
   return Pacientes;
