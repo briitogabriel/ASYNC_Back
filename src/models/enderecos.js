@@ -17,11 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     end_cep: DataTypes.STRING,
     end_cidade: DataTypes.STRING,
     end_estado: DataTypes.STRING,
-    end_logradouro: DataTypes.STRING,
-    end_numero: DataTypes.STRING,
-    end_complemento: DataTypes.STRING,
-    end_bairro: DataTypes.STRING,
-    end_ponto_referencia: DataTypes.STRING,
+    end_logradouro: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Enderecos',
