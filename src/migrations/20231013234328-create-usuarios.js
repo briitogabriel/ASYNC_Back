@@ -60,6 +60,9 @@ module.exports = {
           model: 'Permissoes',
           key: 'per_id'
         }
+      },
+      deleted_at: {
+        type: Sequelize.DATE
       }
     });
   },
