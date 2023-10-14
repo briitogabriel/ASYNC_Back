@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(models.Usuarios)
       this.belongsTo(models.Enderecos)
+      this.belongsTo(models.Complementos)
     }
   }
   Pacientes.init({
