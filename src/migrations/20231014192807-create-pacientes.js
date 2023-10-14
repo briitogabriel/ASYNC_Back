@@ -72,6 +72,14 @@ module.exports = {
           key: 'end_id'
         }
       },
+      comp_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Complementos',
+          key: 'comp_id'
+        }
+      },
       pac_status: {
         allowNull: false,
         type: Sequelize.BOOLEAN

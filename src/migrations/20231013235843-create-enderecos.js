@@ -25,22 +25,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      end_numero: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      end_complemento: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      end_bairro: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      end_ponto_referencia: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -51,7 +35,7 @@ module.exports = {
       },
       deleted_at: {
         type: Sequelize.DATE
-      }
+      } 
     });
   },
   async down(queryInterface, Sequelize) {
