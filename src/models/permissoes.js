@@ -11,10 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(models.Usuarios, {
+        onDelete: "CASCADE",
+        foreignKey: {
+          allowNull: false
+        }
+      })
     }
   }
   Permissoes.init({
-    per_nome: DataTypes.STRING,
+    per_nome: DataTypes.ENUM('Administrador', 'Médico', 'Enfermeiro', 'Paciente'),
     per_recursos: DataTypes.STRING
   }, {
     sequelize,

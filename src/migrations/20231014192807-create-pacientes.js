@@ -82,7 +82,8 @@ module.exports = {
       },
       pac_status: {
         allowNull: false,
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
       },
       usu_id: {
         allowNull: false,

@@ -31,7 +31,8 @@ module.exports = {
       },
       die_status: {
         allowNull: false,
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
       },
       pac_id: {
         allowNull: false,

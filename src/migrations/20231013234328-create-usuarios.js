@@ -33,15 +33,16 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      usu_tipo: {
-        allowNull: false,
-        type: Sequelize.ENUM('Médico', 'Administrador', 'Enfermeiro')
-      },
+      // usu_tipo: {
+      //   allowNull: false,
+      //   type: Sequelize.ENUM('Administrador', 'Médico', 'Enfermeiro')  // TIPO É CRIADO PELA TABELA DE PERMISSÕES (per_id)
+      // },
       usu_status: {
         allowNull: false,
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
       },
-      usu_campo_busca: {    // IRÁ CONCATENAR OS CAMPOS PARA CRIAR UMA STRING E FACILITAR AS QUERIES DE BUSCA
+      usu_campo_busca: {    // IRÁ CONCATENAR OS CAMPOS "nome, cpf, telefone, e-mail" PARA CRIAR UMA STRING E FACILITAR AS QUERIES DE BUSCA
         allowNull: false,
         type: Sequelize.STRING
       },

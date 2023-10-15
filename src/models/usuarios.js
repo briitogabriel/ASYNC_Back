@@ -12,6 +12,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.Permissoes)
+      this.belongsTo(models.Pacientes, {
+        onDelete: "CASCADE",
+        foreignKey: {
+          allowNull: false
+        }
+      })
     }
   }
   Usuarios.init({
@@ -21,7 +27,6 @@ module.exports = (sequelize, DataTypes) => {
     usu_telefone: DataTypes.STRING,
     usu_email: DataTypes.STRING,
     usu_senha: DataTypes.STRING,
-    usu_tipo: DataTypes.ENUM('Médico', 'Administrador', 'Enfermeiro'),
     usu_status: DataTypes.BOOLEAN,
     usu_campo_busca: DataTypes.STRING
   }, {
