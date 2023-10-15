@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Dietas.init({
     die_nome: DataTypes.STRING,
-    die_data: DataTypes.DATE,
+    die_data: DataTypes.DATEONLY,
     die_hora: DataTypes.TIME,
     die_tipo: DataTypes.ENUM('Low Carb', 'Dash', 'Paleolítica', 'Cetogênica', 'Dukan', 'Mediterrânea', 'Outra'),
     die_descricao: DataTypes.STRING,

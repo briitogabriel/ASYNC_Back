@@ -15,7 +15,7 @@ module.exports = {
       },
       exe_data: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       exe_hora: {
         allowNull: false,

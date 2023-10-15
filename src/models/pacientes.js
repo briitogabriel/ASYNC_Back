@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
   Pacientes.init({
     pac_nome: DataTypes.STRING,
     pac_genero: DataTypes.STRING,
-    pac_nascimento: DataTypes.DATE,
+    pac_nascimento: DataTypes.DATEONLY,
     pac_cpf: DataTypes.STRING,
     pac_rg: DataTypes.STRING,
     pac_estado_civil: DataTypes.ENUM('Solteiro/a', 'Casado/a', 'Divorciado/a', 'Viúvo/a'),
@@ -66,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
     pac_cuidados_especiaiS: DataTypes.STRING,
     pac_convenio: DataTypes.STRING,
     pac_numero_convenio: DataTypes.STRING,
-    pac_validade_convenio: DataTypes.DATE,
+    pac_validade_convenio: DataTypes.DATEONLY,
     pac_status: DataTypes.BOOLEAN
   }, {
     sequelize,
