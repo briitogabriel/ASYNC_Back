@@ -15,7 +15,7 @@ module.exports = {
       },
       con_data: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       con_hora: {
         allowNull: false,

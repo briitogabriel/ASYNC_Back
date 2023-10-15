@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Exercicios.init({
     exe_nome: DataTypes.STRING,
-    exe_data: DataTypes.DATE,
+    exe_data: DataTypes.DATEONLY,
     exe_hora: DataTypes.TIME,
     exe_tipo: DataTypes.ENUM('Resistência Aeróbica', 'Resistência Muscular', 'Flexibilidade', 'Força', 'Agilidade', 'Outro'),
     exe_descricao: DataTypes.STRING,

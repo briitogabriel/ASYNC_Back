@@ -19,7 +19,7 @@ module.exports = {
       },
       pac_nascimento: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       pac_cpf: {
         allowNull: false,
@@ -62,7 +62,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       pac_validade_convenio: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       end_id: {
         allowNull: false,

@@ -15,7 +15,7 @@ module.exports = {
       },
       die_data: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       die_hora: {
         allowNull: false,

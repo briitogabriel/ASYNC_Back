@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Exercicios.init({
     med_nome: DataTypes.STRING,
-    med_data: DataTypes.DATE,
+    med_data: DataTypes.DATEONLY,
     med_hora: DataTypes.TIME,
     med_tipo: DataTypes.ENUM('Cápsula', 'Comprimido', 'Líquido', 'Creme', 'Gel', 'Inalação', 'Injeção', 'Spray'),
     med_descricao: DataTypes.STRING,

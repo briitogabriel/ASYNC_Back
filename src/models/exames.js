@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Exames.init({
     exa_nome: DataTypes.STRING,
-    exa_data: DataTypes.DATE,
+    exa_data: DataTypes.DATEONLY,
     exa_hora: DataTypes.TIME,
     exa_tipo: DataTypes.STRING,
     exa_laboratorio: DataTypes.STRING,

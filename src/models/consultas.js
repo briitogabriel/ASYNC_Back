@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Consultas.init({
     con_motivo: DataTypes.STRING,
-    con_data: DataTypes.DATE,
+    con_data: DataTypes.DATEONLY,
     con_hora: DataTypes.TIME,
     con_descricao: DataTypes.STRING,
     con_medicacao: DataTypes.STRING,
