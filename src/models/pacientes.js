@@ -52,12 +52,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Pacientes.init({
+    pac_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     pac_nome: DataTypes.STRING,
     pac_genero: DataTypes.STRING,
     pac_nascimento: DataTypes.DATEONLY,
     pac_cpf: DataTypes.STRING,
     pac_rg: DataTypes.STRING,
-    pac_estado_civil: DataTypes.ENUM('Solteiro/a', 'Casado/a', 'Divorciado/a', 'Viúvo/a'),
+    pac_estado_civil: DataTypes.STRING,
     pac_telefone: DataTypes.STRING,
     pac_email: DataTypes.STRING,
     pac_naturalidade: DataTypes.STRING,
@@ -67,11 +72,15 @@ module.exports = (sequelize, DataTypes) => {
     pac_convenio: DataTypes.STRING,
     pac_numero_convenio: DataTypes.STRING,
     pac_validade_convenio: DataTypes.DATEONLY,
-    pac_status: DataTypes.BOOLEAN
+    end_id: DataTypes.INTEGER,
+    comp_id: DataTypes.INTEGER,
+    usu_id: DataTypes.INTEGER,
   }, {
     sequelize,
     paranoid: true,
     modelName: 'Pacientes',
+    tableName: 'Pacientes',
+    underscored: true
   });
   return Pacientes;
 };

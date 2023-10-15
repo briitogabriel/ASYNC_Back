@@ -14,10 +14,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Logs.init({
+    log_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     log_descricao: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Logs',
+    tableName: 'Logs',
+    underscored: true
   });
   return Logs;
 };

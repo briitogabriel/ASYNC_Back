@@ -20,11 +20,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Permissoes.init({
-    per_nome: DataTypes.ENUM('Administrador', 'Médico', 'Enfermeiro', 'Paciente'),
+    per_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    per_nome: DataTypes.STRING,
     per_recursos: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Permissoes',
+    tableName: 'Permissoes',
+    underscored: true
   });
   return Permissoes;
 };

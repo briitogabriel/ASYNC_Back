@@ -21,18 +21,27 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Usuarios.init({
+    usu_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     usu_nome: DataTypes.STRING,
-    usu_genero: DataTypes.ENUM('M', 'F'),
+    usu_genero: DataTypes.STRING,
     usu_cpf: DataTypes.STRING,
     usu_telefone: DataTypes.STRING,
     usu_email: DataTypes.STRING,
     usu_senha: DataTypes.STRING,
+    // usu_tipo: DataTypes.STRING,  // TIPO É CRIADO PELA TABELA DE PERMISSÕES (per_id)
     usu_status: DataTypes.BOOLEAN,
-    usu_campo_busca: DataTypes.STRING
+    usu_campo_busca: DataTypes.STRING,
+    per_id: DataTypes.INTEGER,
   }, {
     sequelize,
     paranoid: true,
     modelName: 'Usuarios',
+    tableName: 'Usuarios',
+    underscored: true
   });
   return Usuarios;
 };

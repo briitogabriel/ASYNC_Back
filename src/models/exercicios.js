@@ -15,17 +15,24 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Exercicios.init({
+    exe_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     exe_nome: DataTypes.STRING,
     exe_data: DataTypes.DATEONLY,
     exe_hora: DataTypes.TIME,
-    exe_tipo: DataTypes.ENUM('Resistência Aeróbica', 'Resistência Muscular', 'Flexibilidade', 'Força', 'Agilidade', 'Outro'),
+    exe_tipo: DataTypes.STRING,
     exe_descricao: DataTypes.STRING,
     exe_qtd: DataTypes.DECIMAL,
-    exe_status: DataTypes.BOOLEAN,
+    pac_id: DataTypes.INTEGER,
   }, {
     sequelize,
     paranoid: true,
     modelName: 'Exercicios',
+    tableName: 'Exercicios',
+    underscored: true
   });
   return Exercicios;
 };
