@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Exercicios extends Model {
+  class Medicamentos extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -14,20 +14,27 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.Pacientes)
     }
   }
-  Exercicios.init({
+  Medicamentos.init({
+    med_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     med_nome: DataTypes.STRING,
-    med_data: DataTypes.DATE,
+    med_data: DataTypes.DATEONLY,
     med_hora: DataTypes.TIME,
-    med_tipo: DataTypes.ENUM('Cápsula', 'Comprimido', 'Líquido', 'Creme', 'Gel', 'Inalação', 'Injeção', 'Spray'),
+    med_tipo: DataTypes.STRING,
     med_descricao: DataTypes.STRING,
     med_qtd: DataTypes.DECIMAL,
-    med_unidade: DataTypes.ENUM('mg', 'mcg', 'g', 'mL', '%'),
+    med_unidade: DataTypes.STRING,
     med_observacoes: DataTypes.STRING,
-    med_status: DataTypes.BOOLEAN,
+    pac_id: DataTypes.INTEGER,
   }, {
     sequelize,
     paranoid: true,
-    modelName: 'Exercicios',
+    modelName: 'Medicamentos',
+    tableName: 'Medicamentos',
+    underscored: true
   });
-  return Exercicios;
+  return Medicamentos;
 };

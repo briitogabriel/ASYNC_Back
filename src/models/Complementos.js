@@ -20,6 +20,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Complementos.init({
+    comp_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     comp_numero: DataTypes.STRING,
     comp_complemento: DataTypes.STRING,
     comp_bairro: DataTypes.STRING,
@@ -28,6 +33,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     paranoid: true,
     modelName: 'Complementos',
+    tableName: 'Complementos',
+    underscored: true
   });
   return Complementos;
 };

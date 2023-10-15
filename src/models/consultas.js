@@ -15,17 +15,24 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Consultas.init({
+    con_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     con_motivo: DataTypes.STRING,
-    con_data: DataTypes.DATE,
+    con_data: DataTypes.DATEONLY,
     con_hora: DataTypes.TIME,
     con_descricao: DataTypes.STRING,
     con_medicacao: DataTypes.STRING,
     con_dosagem_precaucoes: DataTypes.STRING,
-    con_status: DataTypes.BOOLEAN,
+    pac_id: DataTypes.INTEGER,
   }, {
     sequelize,
     paranoid: true,
     modelName: 'Consultas',
+    tableName: 'Consultas',
+    underscored: true
   });
   return Consultas;
 };

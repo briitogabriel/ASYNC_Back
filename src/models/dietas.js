@@ -25,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
     die_hora: DataTypes.TIME,
     die_tipo: DataTypes.STRING,
     die_descricao: DataTypes.STRING,
-    die_status: DataTypes.BOOLEAN,
     pac_id: DataTypes.INTEGER,
   }, {
     sequelize,
