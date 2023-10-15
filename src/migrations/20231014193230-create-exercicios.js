@@ -45,11 +45,11 @@ module.exports = {
           key: 'pac_id'
         }
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
