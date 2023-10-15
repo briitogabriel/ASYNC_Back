@@ -20,6 +20,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Enderecos.init({
+    end_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     end_cep: DataTypes.STRING,
     end_cidade: DataTypes.STRING,
     end_estado: DataTypes.STRING,
@@ -28,6 +33,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     paranoid: true,
     modelName: 'Enderecos',
+    tableName: 'Enderecos',
+    underscored: true
   });
   return Enderecos;
 };
