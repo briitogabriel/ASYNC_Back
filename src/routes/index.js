@@ -1,9 +1,11 @@
-const { Router } = require('express');
+const { routesFromDietas } = require('./dietas.routes')
 
-const routes = new Router();
+const { Router } = require('express')
+
+const routes = new Router()
 
 routes.use('/api', [
+    routesFromDietas(),
+])
 
-]);
-
-module.exports = { routes };
+module.exports = routes
