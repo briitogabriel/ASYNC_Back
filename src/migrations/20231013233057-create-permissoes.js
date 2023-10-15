@@ -11,17 +11,17 @@ module.exports = {
       },
       per_nome: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.ENUM('Administrador', 'Médico', 'Enfermeiro', 'Paciente')
       },
       per_recursos: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       },

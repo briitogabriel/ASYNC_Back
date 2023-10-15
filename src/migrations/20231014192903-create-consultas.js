@@ -34,7 +34,8 @@ module.exports = {
       },
       con_status: {
         allowNull: false,
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
       },
       pac_id: {
         allowNull: false,
@@ -44,11 +45,11 @@ module.exports = {
           key: 'pac_id'
         }
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       },

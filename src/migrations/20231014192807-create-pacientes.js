@@ -72,9 +72,18 @@ module.exports = {
           key: 'end_id'
         }
       },
+      comp_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Complementos',
+          key: 'comp_id'
+        }
+      },
       pac_status: {
         allowNull: false,
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
       },
       usu_id: {
         allowNull: false,
@@ -84,11 +93,11 @@ module.exports = {
           key: 'usu_id'
         }
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       },

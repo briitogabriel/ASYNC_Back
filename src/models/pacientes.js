@@ -11,8 +11,44 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.Usuarios)
+      this.belongsTo(models.Usuarios, {
+        onDelete: "CASCADE",
+        foreignKey: {
+          allowNull: false
+        }
+      })
       this.belongsTo(models.Enderecos)
+      this.belongsTo(models.Complementos)
+      this.hasMany(models.Consultas, {
+        onDelete: "CASCADE",
+        foreignKey: {
+          allowNull: false
+        }
+      })
+      this.hasMany(models.Exames, {
+        onDelete: "CASCADE",
+        foreignKey: {
+          allowNull: false
+        }
+      })
+      this.hasMany(models.Dietas, {
+        onDelete: "CASCADE",
+        foreignKey: {
+          allowNull: false
+        }
+      })
+      this.hasMany(models.Exercicios, {
+        onDelete: "CASCADE",
+        foreignKey: {
+          allowNull: false
+        }
+      })
+      this.hasMany(models.Medicamentos, {
+        onDelete: "CASCADE",
+        foreignKey: {
+          allowNull: false
+        }
+      })
     }
   }
   Pacientes.init({
@@ -34,6 +70,7 @@ module.exports = (sequelize, DataTypes) => {
     pac_status: DataTypes.BOOLEAN
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'Pacientes',
   });
   return Pacientes;

@@ -1,27 +1,28 @@
 'use strict';
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Enderecos', {
-      end_id: {
+  async up (queryInterface, Sequelize) {
+    await queryInterface.createTable('Complementos', { 
+      comp_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+        primaryKey: true
       },
-      end_cep: {
+      comp_numero: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      end_cidade: {
+      comp_complemento: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      end_estado: {
+      comp_bairro: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      end_logradouro: {
+      comp_ponto_referencia: {
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -36,11 +37,9 @@ module.exports = {
       deleted_at: {
         type: Sequelize.DATE
       } 
-    });
+      });
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Enderecos');
+  async down (queryInterface, Sequelize) {
+    await queryInterface.dropTable('Complementos');
   }
 };
-
-// Endereço: Objeto do tipo endereço, Cep, Cidade, Estado, Logradouro, Número, Complemento, Bairro e Ponto de Referência. Obrigatório.

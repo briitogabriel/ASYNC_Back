@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Dietas extends Model {
+  class Complementos extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,20 +11,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.Pacientes)
+      this.hasMany(models.Usuarios, {
+        onDelete: "CASCADE",
+        foreignKey: {
+          allowNull: false
+        }
+      })
     }
   }
-  Dietas.init({
-    die_nome: DataTypes.STRING,
-    die_data: DataTypes.DATE,
-    die_hora: DataTypes.TIME,
-    die_tipo: DataTypes.ENUM('Low Carb', 'Dash', 'Paleolítica', 'Cetogênica', 'Dukan', 'Mediterrânea', 'Outra'),
-    die_descricao: DataTypes.STRING,
-    die_status: DataTypes.BOOLEAN,
+  Complementos.init({
+    comp_numero: DataTypes.STRING,
+    comp_complemento: DataTypes.STRING,
+    comp_bairro: DataTypes.STRING,
+    comp_ponto_referencia: DataTypes.STRING,
   }, {
     sequelize,
     paranoid: true,
-    modelName: 'Dietas',
+    modelName: 'Complementos',
   });
-  return Dietas;
+  return Complementos;
 };
