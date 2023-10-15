@@ -1,4 +1,5 @@
 require("dotenv").config();
+const PORT = process.env.APP_PORT;
 const { server } = require("./server");
 const { Sequelize } = require("sequelize");
 const DB_CONFIG = require("./config/database");
@@ -15,6 +16,6 @@ const connect = async () => {
 
 connect();
 
-server.listen(process.env.APP_PORT, () => {
-  console.log(`Servidor rodando na porta ${process.env.APP_PORT}`);
+server.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
