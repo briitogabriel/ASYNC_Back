@@ -2,7 +2,6 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const { Sequelize } = require("sequelize");
 const DB_CONFIG = require("../config/database");
-const { response } = require("express");
 const sequelize = new Sequelize(DB_CONFIG);
 const Usuarios = require("../models/usuarios")(sequelize, Sequelize);
 
@@ -60,41 +59,81 @@ class UsuarioController {
         success: isPasswordValid,
       });
     } catch (error) {
-      return res.status(400).send({
-        message: "Erro ao realizar o login do usuário.",
+      return res.status(500).send({
+        message: "Não conseguimos processar sua solicitação.",
         cause: error.message,
       });
     }
+  };
+
+  async resetarSenha(req, res) {
+    try {
+      const { id, email, novaSenha } = req.body;
+
+      const usuario = await Usuarios.findByPk(id);
+
+      if (!usuario) {
+        return res.status(400).send({message: "Usuário não encontrado."})
+      };
+
+      const emailInDb = await Usuarios.findOne({
+        where: {usu_email:email}
+      });
+
+      if (!emailInDb) {
+        return res.status(400).send({message: "Email não cadastrado."})
+      };
+
+      if (!novaSenha) {
+        return res.status(400).send({message: "Informe uma senha válida."})
+      }
+
+      if (novaSenha === usuario.usu_senha) {
+        return res.status(400).send({message: "A senha já está sendo utilizada."})
+      };
+
+      usuario.usu_senha = novaSenha;
+
+      await usuario.save();
+
+      return res.status(200).send();
+
+    } catch (error) {
+      return res.status(400).send({
+        message: "Erro ao atualizar senha do usuário.",
+        cause: error.message
+      });
+    };
   }
 
   async create(req, res) {
     try {
-      const requiredFields = [
-        "usu_nome",
-        "usu_genero",
-        "usu_cpf",
-        "usu_telefone",
-        "usu_email",
-        "usu_senha",
-        "usu_status",
-        "usu_campo_busca",
+      const camposObrigatorios = [
+        "nome",
+        "genero",
+        "cpf",
+        "telefone",
+        "email",
+        "senha",
+        "status",
+        "campo_busca",
         "per_id",
       ];
 
-      for (const field of requiredFields) {
-        if (!req.body[field]) {
+      for (const campo of camposObrigatorios) {
+        if (!req.body[campo]) {
           return res.status(400).send({
-            message: `O campo ${field} é obrigatório.`,
+            message: `O campo ${campo} é obrigatório.`,
           });
         }
       }
 
       const cpfInDb = await Usuarios.findOne({
-        where: { usu_cpf: req.body.usu_cpf },
+        where: { usu_cpf: req.body.cpf },
       });
 
       const emailInDb = await Usuarios.findOne({
-        where: { usu_email: req.body.usu_email },
+        where: { usu_email: req.body.email },
       });
 
       if (cpfInDb || emailInDb) {
@@ -104,14 +143,14 @@ class UsuarioController {
       }
 
       const usuarioCriado = await Usuarios.create({
-        usu_nome: req.body.usu_nome,
-        usu_genero: req.body.usu_genero,
-        usu_cpf: req.body.usu_cpf,
-        usu_telefone: req.body.usu_telefone,
-        usu_email: req.body.usu_email,
-        usu_senha: req.body.usu_senha,
-        usu_status: req.body.usu_status,
-        usu_campo_busca: req.body.usu_campo_busca,
+        usu_nome: req.body.nome,
+        usu_genero: req.body.genero,
+        usu_cpf: req.body.cpf,
+        usu_telefone: req.body.telefone,
+        usu_email: req.body.email,
+        usu_senha: req.body.senha,
+        usu_status: req.body.status,
+        usu_campo_busca: req.body.campo_busca,
         per_id: req.body.per_id,
       });
 
@@ -121,12 +160,12 @@ class UsuarioController {
           message: `Usuário ${usuarioCriado.usu_nome} criado com sucesso!`,
         });
     } catch (error) {
-      return res.status(400).send({
-        message: "Erro na criação do usuário.",
+      return res.status(500).send({
+        message: "Não foi possível processar a solicitação.",
         cause: error.message,
       });
     }
-  }
+  };
 }
 
 module.exports = new UsuarioController();

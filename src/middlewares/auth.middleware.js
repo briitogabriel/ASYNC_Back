@@ -15,7 +15,25 @@ async function auth(req, res, next) {
 
         jwt.verify(authorization.replace('Bearer ', ''), 
             process.env.APP_SECRET,
-            next()
+            (error, decoded) => {
+                if (error) {
+                   if (error.name === 'TokenExpiredError') {
+                    return res.status(401).json({
+                        message: "Token expirado."
+                    });
+                    } else if (error.name === "JsonWebTokenError") {
+                        return res.status(401).json({
+                            message: "Token inválido."
+                        });
+                    } else {
+                        return res.status(500).json({
+                            message: "Internal server error"
+                        });
+                    };
+                } else {
+                    return next()
+                };
+            }
         );
     } catch (error) {
         return res.status(401).send({
