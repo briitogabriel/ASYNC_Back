@@ -60,16 +60,24 @@ class UsuarioController {
         success: isPasswordValid,
       });
     } catch (error) {
-      return res.status(400).send({
-        message: "Erro ao realizar o login do usuário.",
+      return res.status(500).send({
+        message: "Não conseguimos processar sua solicitação.",
         cause: error.message,
       });
+    }
+  };
+
+  async resetarSenha(req, res) {
+    try {
+      
+    } catch (error) {
+      
     }
   }
 
   async create(req, res) {
     try {
-      const requiredFields = [
+      const camposObrigatorios = [
         "usu_nome",
         "usu_genero",
         "usu_cpf",
@@ -81,10 +89,10 @@ class UsuarioController {
         "per_id",
       ];
 
-      for (const field of requiredFields) {
-        if (!req.body[field]) {
+      for (const campo of camposObrigatorios) {
+        if (!req.body[campo]) {
           return res.status(400).send({
-            message: `O campo ${field} é obrigatório.`,
+            message: `O campo ${campo} é obrigatório.`,
           });
         }
       }
@@ -121,12 +129,12 @@ class UsuarioController {
           message: `Usuário ${usuarioCriado.usu_nome} criado com sucesso!`,
         });
     } catch (error) {
-      return res.status(400).send({
-        message: "Erro na criação do usuário.",
+      return res.status(500).send({
+        message: "Não foi possível processar a solicitação.",
         cause: error.message,
       });
     }
-  }
+  };
 }
 
 module.exports = new UsuarioController();
