@@ -1,19 +1,19 @@
-const { Router } = require('express');
-const { login } = require('../controllers/usuario.controller');
+const { Router } = require("express");
+const { login, create, resetarSenha } = require("../controllers/usuario.controller");
+const { auth } = require("../middlewares/auth.middleware");
 
 class UsuariosRouter {
-    routesFromUsuario() {
-        const usuarioRoutes = Router()
-        usuarioRoutes.post('/usuarios/login', login)
-        /* 
-        usuarioRoutes.patch('/usuarios/resetarsenha/:usuarioId', resetarSenha)
-        usuarioRoutes.post('/usuarios', create)
-        usuarioRoutes.put('/usuarios/:usuarioId', update)
+  routesFromUsuario() {
+    const usuarioRoutes = Router();
+    usuarioRoutes.post("/usuarios/login", login);
+    usuarioRoutes.post("/usuarios", auth, create);
+    usuarioRoutes.patch('/usuarios/resetar-senha', auth, resetarSenha);
+    /*  usuarioRoutes.put('/usuarios/:usuarioId', update)
         usuarioRoutes.get('/usuarios', findAll)
         usuarioRoutes.delete('/usuarios/:usuarioId', remove) */
 
-        return usuarioRoutes
-    };
-};
+    return usuarioRoutes;
+  }
+}
 
 module.exports = new UsuariosRouter();
