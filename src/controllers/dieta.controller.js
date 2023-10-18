@@ -39,9 +39,17 @@ class DietaController {
             return res.status(201).send(dietaCreated)
 
         } catch (error) {
+            
+            if (error.name === 'ValidationError') {
+                return res.status(400).send({
+                    message: "Erro na criação da Dieta",
+                    cause: error
+                })
+            }
+
             return res.status(500).send({
-                message: "Erro na criação da Dieta",
-                cause: error.message
+                message: "Ocorreu um erro desconhecido",
+                cause: error
             })
         }
     }
