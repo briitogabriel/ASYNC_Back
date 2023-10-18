@@ -182,7 +182,7 @@ class UsuarioController {
             message: `O campo ${campo} é obrigatório.`,
           });
         }
-      };
+      }
 
       const { usuarioId } = req.params;
       const { nome, genero, telefone, senha, per_id } = req.body;
@@ -210,6 +210,34 @@ class UsuarioController {
     } catch (error) {
       return res.status(500).send({
         message: "Não conseguimos processar a sua solicitação.",
+        cause: error.message,
+      });
+    }
+  }
+
+  async findAll(req, res) {
+    try {
+      const usuarios = await Usuarios.findAll();
+
+      const usuariosEncontrados = usuarios.map((usuario) => {
+        return {
+          usuarioId: usuario.usu_id,
+          nome: usuario.usu_nome,
+          genero: usuario.usu_genero,
+          cpf: usuario.usu_cpf,
+          telefone: usuario.usu_telefone,
+          email: usuario.usu_email,
+          status: usuario.usu_status,
+          permissao: usuario.per_id,
+          createdAt: usuario.createdAt,
+          updatedAt: usuario.updatedAt,
+        };
+      });
+
+      return res.status(200).send(usuariosEncontrados);
+    } catch (error) {
+      return res.status(500).send({
+        message: "Erro ao listar todos os usuários",
         cause: error.message,
       });
     }
