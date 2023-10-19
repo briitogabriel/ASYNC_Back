@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { create } = require('../controllers/dieta.controller');
+const { create, findAllByPatient } = require('../controllers/dieta.controller');
 const { auth } = require('../middlewares/auth.middleware');
 
 class DietaRouter{
@@ -9,6 +9,7 @@ class DietaRouter{
             response.status(200).send({message: `${process.env.APP_NAME} está no ar!`});
             });
         dietaRoutes.post('/dietas', auth, create)
+        dietaRoutes.get('/dietas', auth, findAllByPatient)
 
         return dietaRoutes
     }
