@@ -23,7 +23,7 @@ class UsuarioController {
       });
 
       if (!usuario) {
-        return res.status(400).send({
+        return res.status(404).send({
           message:
             "Não foi possível realizar a autenticação. Usuário não cadastrado.",
           data: null,
@@ -73,7 +73,7 @@ class UsuarioController {
       const usuario = await Usuarios.findByPk(usuarioId);
 
       if (!usuario) {
-        return res.status(400).send({ message: "Usuário não encontrado." });
+        return res.status(404).send({ message: "Usuário não encontrado." });
       }
 
       const emailInDb = await Usuarios.findOne({
@@ -190,7 +190,7 @@ class UsuarioController {
       const usuario = await Usuarios.findByPk(usuarioId);
 
       if (!usuario) {
-        return res.status(400).send({ message: "Usuário não encontrado." });
+        return res.status(404).send({ message: "Usuário não encontrado." });
       }
 
       if (usuario.usu_senha !== senha) {
@@ -241,6 +241,36 @@ class UsuarioController {
         cause: error.message,
       });
     }
+  };
+
+  async remove(req, res) {
+    try {
+      const { usuarioId } = req.params;
+      const { id } = req.body;
+
+      const usuario = await Usuarios.findByPk(usuarioId);
+
+      if (!usuario) {
+        return res.status(404).send({message: "Usuário não encontrado."})
+      };
+
+      if (usuario.usu_id === id) {
+        return res.status(401).send({message: "Operação não autorizada."})
+      };
+
+      await usuario.destroy();
+
+      usuario.usu_status = false;
+
+      await usuario.save();
+
+      return res.status(200).send({message: "Usuário removido com sucesso."})
+    } catch (error) {
+      return res.status(500).send({
+        message: "Erro ao remover usuário",
+        cause: error.message
+      });
+    };
   }
 }
 
