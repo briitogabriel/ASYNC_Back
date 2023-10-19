@@ -2,6 +2,7 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const { Sequelize } = require("sequelize");
 const DB_CONFIG = require("../config/database");
+const usuarioSchema = require("../validations/usuarioValidation");
 const sequelize = new Sequelize(DB_CONFIG);
 const Usuarios = require("../models/usuarios")(sequelize, Sequelize);
 
@@ -68,33 +69,33 @@ class UsuarioController {
 
   async resetarSenha(req, res) {
     try {
-      const { usuarioId, email, novaSenha } = req.body;
+      const { usu_id, usu_email, usu_senha } = req.body;
 
-      const usuario = await Usuarios.findByPk(usuarioId);
+      const usuario = await Usuarios.findByPk(usu_id);
 
       if (!usuario) {
         return res.status(404).send({ message: "Usuário não encontrado." });
-      }
+      };
 
       const emailInDb = await Usuarios.findOne({
-        where: { usu_email: email },
+        where: { usu_email: usu_email },
       });
 
       if (!emailInDb) {
         return res.status(400).send({ message: "Email não cadastrado." });
-      }
+      };
 
-      if (!novaSenha) {
+      if (!usu_senha) {
         return res.status(400).send({ message: "Informe uma senha válida." });
-      }
+      };
 
-      if (novaSenha === usuario.usu_senha) {
+      if (usu_senha === usuario.usu_senha) {
         return res
           .status(400)
           .send({ message: "A senha já está sendo utilizada." });
-      }
+      };
 
-      usuario.usu_senha = novaSenha;
+      usuario.usu_senha = usu_senha;
 
       await usuario.save();
 
@@ -109,32 +110,33 @@ class UsuarioController {
 
   async create(req, res) {
     try {
-      const camposObrigatorios = [
-        "nome",
-        "genero",
-        "cpf",
-        "telefone",
-        "email",
-        "senha",
-        "status",
-        "campo_busca",
-        "per_id",
-      ];
+      const {
+        usu_nome,
+        usu_genero,
+        usu_cpf,
+        usu_telefone,
+        usu_email,
+        usu_senha,
+        usu_status,
+        per_id,
+      } = req.body;
 
-      for (const campo of camposObrigatorios) {
-        if (!req.body[campo]) {
-          return res.status(400).send({
-            message: `O campo ${campo} é obrigatório.`,
-          });
-        }
-      }
+      await usuarioSchema.validate({
+        usu_nome,
+        usu_genero,
+        usu_cpf,
+        usu_telefone,
+        usu_email,
+        usu_senha,
+        usu_status,
+      });
 
       const cpfInDb = await Usuarios.findOne({
-        where: { usu_cpf: req.body.cpf },
+        where: { usu_cpf: usu_cpf },
       });
 
       const emailInDb = await Usuarios.findOne({
-        where: { usu_email: req.body.email },
+        where: { usu_email: usu_email },
       });
 
       if (cpfInDb || emailInDb) {
@@ -144,15 +146,16 @@ class UsuarioController {
       }
 
       const usuarioCriado = await Usuarios.create({
-        usu_nome: req.body.nome,
-        usu_genero: req.body.genero,
-        usu_cpf: req.body.cpf,
-        usu_telefone: req.body.telefone,
-        usu_email: req.body.email,
-        usu_senha: req.body.senha,
-        usu_status: req.body.status,
-        usu_campo_busca: req.body.campo_busca,
-        per_id: req.body.per_id,
+        usu_nome: usu_nome,
+        usu_genero: usu_genero,
+        usu_cpf: usu_cpf,
+        usu_telefone: usu_telefone,
+        usu_email: usu_email,
+        usu_senha: usu_senha,
+        usu_status: usu_status,
+        usu_campo_busca:
+          usu_nome + " | " + usu_cpf + " | " + usu_telefone + " | " + usu_email,
+        per_id: per_id,
       });
 
       return res.status(201).send({
@@ -168,24 +171,26 @@ class UsuarioController {
 
   async update(req, res) {
     try {
-      const camposObrigatorios = [
-        "nome",
-        "genero",
-        "telefone",
-        "senha",
-        "per_id",
-      ];
+      const {
+        usu_nome,
+        usu_genero,
+        usu_cpf,
+        usu_telefone,
+        usu_email,
+        usu_senha,
+        per_id,
+      } = req.body;
 
-      for (const campo of camposObrigatorios) {
-        if (!req.body[campo]) {
-          return res.status(400).send({
-            message: `O campo ${campo} é obrigatório.`,
-          });
-        }
-      }
+      await usuarioSchema.validate({
+        usu_nome,
+        usu_genero,
+        usu_cpf,
+        usu_telefone,
+        usu_email,
+        usu_senha,
+      });
 
       const { usuarioId } = req.params;
-      const { nome, genero, telefone, senha, per_id } = req.body;
 
       const usuario = await Usuarios.findByPk(usuarioId);
 
@@ -193,20 +198,22 @@ class UsuarioController {
         return res.status(404).send({ message: "Usuário não encontrado." });
       }
 
-      if (usuario.usu_senha !== senha) {
+      if (usuario.usu_senha !== usu_senha) {
         return res.status(400).send({ message: "Senha incorreta." });
       }
 
-      usuario.usu_nome = nome;
-      usuario.usu_genero = genero;
-      usuario.usu_telefone = telefone;
+      usuario.usu_nome = usu_nome;
+      usuario.usu_genero = usu_genero;
+      usuario.usu_telefone = usu_telefone;
+      usuario.usu_email = usu_email;
       usuario.per_id = per_id;
+      usuario.usu_campo_busca = usu_nome + " | " + usuario.usu_cpf + " | " + usu_telefone + " | " + usu_email;
 
       await usuario.save();
 
       return res
         .status(200)
-        .send({ message: `Usuário ${nome} atualizado com sucesso!` });
+        .send({ message: `Usuário ${usu_nome} atualizado com sucesso!` });
     } catch (error) {
       return res.status(500).send({
         message: "Não conseguimos processar a sua solicitação.",
@@ -241,7 +248,7 @@ class UsuarioController {
         cause: error.message,
       });
     }
-  };
+  }
 
   async remove(req, res) {
     try {
@@ -251,12 +258,12 @@ class UsuarioController {
       const usuario = await Usuarios.findByPk(usuarioId);
 
       if (!usuario) {
-        return res.status(404).send({message: "Usuário não encontrado."})
-      };
+        return res.status(404).send({ message: "Usuário não encontrado." });
+      }
 
       if (usuario.usu_id === id) {
-        return res.status(401).send({message: "Operação não autorizada."})
-      };
+        return res.status(401).send({ message: "Operação não autorizada." });
+      }
 
       await usuario.destroy();
 
@@ -264,13 +271,13 @@ class UsuarioController {
 
       await usuario.save();
 
-      return res.status(200).send({message: "Usuário removido com sucesso."})
+      return res.status(200).send({ message: "Usuário removido com sucesso." });
     } catch (error) {
       return res.status(500).send({
         message: "Erro ao remover usuário",
-        cause: error.message
+        cause: error.message,
       });
-    };
+    }
   }
 }
 
