@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { login, create, resetarSenha, update, findAll } = require("../controllers/usuario.controller");
+const { login, create, resetarSenha, update, findAll, remove } = require("../controllers/usuario.controller");
 const { auth } = require("../middlewares/auth.middleware");
 
 class UsuariosRouter {
@@ -10,10 +10,8 @@ class UsuariosRouter {
     usuarioRoutes.patch('/usuarios/resetar-senha', auth, resetarSenha);
     usuarioRoutes.put('/usuarios/:usuarioId', auth, update);
     usuarioRoutes.get('/usuarios', auth, findAll);
-    /*  
-        
-        usuarioRoutes.delete('/usuarios/:usuarioId', remove) */
-
+    usuarioRoutes.delete('/usuarios/:usuarioId', auth, remove)
+    
     return usuarioRoutes;
   }
 }
