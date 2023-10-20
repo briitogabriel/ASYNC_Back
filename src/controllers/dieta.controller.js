@@ -44,7 +44,7 @@ class DietaController {
             if (error.name === 'ValidationError') {
                 return res.status(400).send({
                     message: "Erro na criação da Dieta",
-                    cause: error
+                    cause: error.message
                 })
             }
 
@@ -82,6 +82,60 @@ class DietaController {
                 message: "Erro ao listar todos os usuários",
                 cause: error.message,
             });
+        }
+    }
+  
+    async update(req, res) {
+        try {    
+          const { dietaId } = req.params;
+          const dieta = await Dietas.findByPk(dietaId);
+          if (!dieta) {
+            return res.status(400).send({ message: "Dieta não encontrada." });
+          }
+
+          const { 
+            die_nome,
+            die_data,
+            die_hora,
+            die_tipo,
+            die_descricao
+          } = req.body;
+
+          await dietaSchema.validate(
+            {
+              die_nome,
+              die_data,
+              die_hora,
+              die_tipo,
+              die_descricao,
+            }
+          );
+    
+          dieta.die_nome = die_nome
+          dieta.die_data = die_data
+          dieta.die_hora = die_hora
+          dieta.die_tipo = die_tipo
+          dieta.die_descricao = die_descricao
+          dieta.updated_at = new Date()
+    
+          await dieta.save();
+    
+          return res
+            .status(201)
+            .send({ message: `Dieta '${die_nome}' atualizada com sucesso!` });
+        } catch (error) {
+            
+          if (error.name === 'ValidationError') {
+              return res.status(400).send({
+                  message: "Erro na atualização da Dieta",
+                  cause: error.message
+              })
+          }
+
+          return res.status(500).send({
+              message: "Ocorreu um erro desconhecido",
+              cause: error
+          })
         }
     }
 }
