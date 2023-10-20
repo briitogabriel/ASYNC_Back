@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { create, findAllByPatient, update } = require('../controllers/dieta.controller');
+const { create, findAllByPatient, update, remove, findAllAdmin } = require('../controllers/dieta.controller');
 const { auth } = require('../middlewares/auth.middleware');
 
 class DietaRouter{
@@ -11,6 +11,7 @@ class DietaRouter{
         dietaRoutes.post('/dietas', auth, create)
         dietaRoutes.get('/dietas', auth, findAllByPatient)
         dietaRoutes.put('/dietas/:dietaId', auth, update)
+        dietaRoutes.delete('/dietas/:dietaId', auth, remove)
 
         return dietaRoutes
     }
