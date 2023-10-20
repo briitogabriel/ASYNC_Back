@@ -160,6 +160,20 @@ class DietaController {
             });
         };
     }
+
+    async findAllAdmin(req, res) {
+      try {
+          const dietas = await Dietas.findAll({ paranoid: false })
+
+          return res.status(200).send({ dietas });
+
+      } catch (error) {
+          return res.status(500).send({
+              message: "Erro ao listar dietas",
+              cause: error.message,
+          });
+      }
+  }
 }
 
 module.exports = new DietaController()
