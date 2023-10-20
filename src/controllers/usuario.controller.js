@@ -23,7 +23,7 @@ class UsuarioController {
       });
 
       if (!usuario) {
-        return res.status(400).send({
+        return res.status(404).send({
           message:
             "Não foi possível realizar a autenticação. Usuário não cadastrado.",
           data: null,
@@ -64,46 +64,47 @@ class UsuarioController {
         cause: error.message,
       });
     }
-  };
+  }
 
   async resetarSenha(req, res) {
     try {
-      const { id, email, novaSenha } = req.body;
+      const { usuarioId, email, novaSenha } = req.body;
 
-      const usuario = await Usuarios.findByPk(id);
+      const usuario = await Usuarios.findByPk(usuarioId);
 
       if (!usuario) {
-        return res.status(400).send({message: "Usuário não encontrado."})
-      };
+        return res.status(404).send({ message: "Usuário não encontrado." });
+      }
 
       const emailInDb = await Usuarios.findOne({
-        where: {usu_email:email}
+        where: { usu_email: email },
       });
 
       if (!emailInDb) {
-        return res.status(400).send({message: "Email não cadastrado."})
-      };
+        return res.status(400).send({ message: "Email não cadastrado." });
+      }
 
       if (!novaSenha) {
-        return res.status(400).send({message: "Informe uma senha válida."})
+        return res.status(400).send({ message: "Informe uma senha válida." });
       }
 
       if (novaSenha === usuario.usu_senha) {
-        return res.status(400).send({message: "A senha já está sendo utilizada."})
-      };
+        return res
+          .status(400)
+          .send({ message: "A senha já está sendo utilizada." });
+      }
 
       usuario.usu_senha = novaSenha;
 
       await usuario.save();
 
       return res.status(200).send();
-
     } catch (error) {
       return res.status(400).send({
         message: "Erro ao atualizar senha do usuário.",
-        cause: error.message
+        cause: error.message,
       });
-    };
+    }
   }
 
   async create(req, res) {
@@ -154,18 +155,123 @@ class UsuarioController {
         per_id: req.body.per_id,
       });
 
-      return res
-        .status(201)
-        .send({
-          message: `Usuário ${usuarioCriado.usu_nome} criado com sucesso!`,
-        });
+      return res.status(201).send({
+        message: `Usuário ${usuarioCriado.usu_nome} criado com sucesso!`,
+      });
     } catch (error) {
       return res.status(500).send({
         message: "Não foi possível processar a solicitação.",
         cause: error.message,
       });
     }
+  }
+
+  async update(req, res) {
+    try {
+      const camposObrigatorios = [
+        "nome",
+        "genero",
+        "telefone",
+        "senha",
+        "per_id",
+      ];
+
+      for (const campo of camposObrigatorios) {
+        if (!req.body[campo]) {
+          return res.status(400).send({
+            message: `O campo ${campo} é obrigatório.`,
+          });
+        }
+      }
+
+      const { usuarioId } = req.params;
+      const { nome, genero, telefone, senha, per_id } = req.body;
+
+      const usuario = await Usuarios.findByPk(usuarioId);
+
+      if (!usuario) {
+        return res.status(404).send({ message: "Usuário não encontrado." });
+      }
+
+      if (usuario.usu_senha !== senha) {
+        return res.status(400).send({ message: "Senha incorreta." });
+      }
+
+      usuario.usu_nome = nome;
+      usuario.usu_genero = genero;
+      usuario.usu_telefone = telefone;
+      usuario.per_id = per_id;
+
+      await usuario.save();
+
+      return res
+        .status(200)
+        .send({ message: `Usuário ${nome} atualizado com sucesso!` });
+    } catch (error) {
+      return res.status(500).send({
+        message: "Não conseguimos processar a sua solicitação.",
+        cause: error.message,
+      });
+    }
+  }
+
+  async findAll(req, res) {
+    try {
+      const usuarios = await Usuarios.findAll();
+
+      const usuariosEncontrados = usuarios.map((usuario) => {
+        return {
+          usuarioId: usuario.usu_id,
+          nome: usuario.usu_nome,
+          genero: usuario.usu_genero,
+          cpf: usuario.usu_cpf,
+          telefone: usuario.usu_telefone,
+          email: usuario.usu_email,
+          status: usuario.usu_status,
+          permissao: usuario.per_id,
+          createdAt: usuario.createdAt,
+          updatedAt: usuario.updatedAt,
+        };
+      });
+
+      return res.status(200).send(usuariosEncontrados);
+    } catch (error) {
+      return res.status(500).send({
+        message: "Erro ao listar todos os usuários",
+        cause: error.message,
+      });
+    }
   };
+
+  async remove(req, res) {
+    try {
+      const { usuarioId } = req.params;
+      const { id } = req.body;
+
+      const usuario = await Usuarios.findByPk(usuarioId);
+
+      if (!usuario) {
+        return res.status(404).send({message: "Usuário não encontrado."})
+      };
+
+      if (usuario.usu_id === id) {
+        return res.status(401).send({message: "Operação não autorizada."})
+      };
+
+      await usuario.destroy();
+
+      usuario.usu_status = false;
+
+      await usuario.save();
+
+      return res.status(200).send({message: "Usuário removido com sucesso."})
+    } catch (error) {
+      return res.status(500).send({
+        message: "Erro ao remover usuário",
+        cause: error.message
+      });
+    };
+  }
 }
 
 module.exports = new UsuarioController();
