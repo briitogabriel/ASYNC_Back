@@ -50,7 +50,7 @@ class DietaController {
 
             return res.status(500).send({
                 message: "Ocorreu um erro desconhecido",
-                cause: error
+                cause: error.message
             })
         }
     }
@@ -65,7 +65,6 @@ class DietaController {
             }});
             
             const pac_id = patientData.length > 0 ? patientData.map(patient => patient.dataValues.pac_id) : null
-            console.log(pac_id)
             const dietas = pac_id
                 ? await Dietas.findAll({ where: { pac_id: pac_id } })
                 : await Dietas.findAll()
@@ -79,7 +78,7 @@ class DietaController {
 
         } catch (error) {
             return res.status(500).send({
-                message: "Erro ao listar todos os usuários",
+                message: "Erro ao listar dietas",
                 cause: error.message,
             });
         }
@@ -134,10 +133,47 @@ class DietaController {
 
           return res.status(500).send({
               message: "Ocorreu um erro desconhecido",
-              cause: error
+              cause: error.message
           })
         }
     }
+
+    async remove(req, res) {
+        try {
+            const { dietaId } = req.params;
+
+            const dieta = await Dietas.findByPk(dietaId);
+
+            if (!dieta) {
+              return res.status(400).send({message: "Dieta não encontrada."})
+            };
+
+            await dieta.destroy();
+            dieta.die_status = false;
+            await dieta.save();
+
+            return res.status(202).send({message: "Dieta removida com sucesso."})
+        } catch (error) {
+            return res.status(500).send({
+              message: "Erro ao remover dieta",
+              cause: error.message
+            });
+        };
+    }
+
+    async findAllAdmin(req, res) {
+      try {
+          const dietas = await Dietas.findAll({ paranoid: false })
+
+          return res.status(200).send({ dietas });
+
+      } catch (error) {
+          return res.status(500).send({
+              message: "Erro ao listar dietas",
+              cause: error.message,
+          });
+      }
+  }
 }
 
 module.exports = new DietaController()
