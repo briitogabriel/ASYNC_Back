@@ -1,7 +1,9 @@
-const { Sequelize, Op } = require("sequelize");
+const { Sequelize} = require("sequelize");
 const DB_CONFIG = require("../config/database");
 const pacienteSchema = require("../validations/pacienteValidation");
 const sequelize = new Sequelize(DB_CONFIG);
+const Complementos = require("../models/Complementos")(sequelize, Sequelize);
+const Enderecos = require("../models/enderecos")(sequelize, Sequelize);
 const Pacientes = require("../models/pacientes")(sequelize, Sequelize);
 
 class PacienteController {
@@ -23,8 +25,14 @@ class PacienteController {
         pac_convenio,
         pac_numero_convenio,
         pac_validade_convenio,
-        end_id,
-        comp_id,
+        end_cep,
+        end_cidade,
+        end_estado,
+        end_logradouro,
+        comp_numero,
+        comp_complemento,
+        comp_bairro,
+        comp_ponto_referencia,
         usu_id,
       } = req.body;
 
@@ -60,6 +68,30 @@ class PacienteController {
         });
       }
 
+      const cepCadastrado = await Enderecos.findOne({
+        where: { end_cep }
+      });
+
+      if (!cepCadastrado) {
+        await Enderecos.create({
+          end_cep,
+          end_cidade,
+          end_estado,
+          end_logradouro
+        });
+      };
+
+      const complemento = await Complementos.create({
+        comp_numero,
+        comp_complemento,
+        comp_bairro,
+        comp_ponto_referencia
+      });
+
+      const endInDb = await Enderecos.findOne({
+        where: { end_cep }
+      });
+ 
       await Pacientes.create({
         pac_nome: pac_nome,
         pac_genero: pac_genero,
@@ -76,8 +108,8 @@ class PacienteController {
         pac_convenio: pac_convenio,
         pac_numero_convenio: pac_numero_convenio,
         pac_validade_convenio: pac_validade_convenio,
-        end_id: end_id,
-        comp_id: comp_id,
+        end_id: endInDb.end_id,
+        comp_id: complemento.comp_id,
         usu_id: usu_id,
       });
 
