@@ -1,11 +1,12 @@
 const { Router } = require("express");
 const { auth } = require("../middlewares/auth.middleware");
-const { create } = require("../controllers/paciente.controller");
+const { create, update } = require("../controllers/paciente.controller");
 
 class PacientesRouter {
   routesFromPaciente() {
     const pacienteRoutes = Router();
     pacienteRoutes.post("/pacientes", auth, create);
+    pacienteRoutes.put("/pacientes/pacienteId", update);
 
     return pacienteRoutes;
   }
