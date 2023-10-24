@@ -81,17 +81,17 @@ class PacienteController {
         });
       };
 
+      const endInDb = await Enderecos.findOne({
+        where: { end_cep }
+      });
+
       const complemento = await Complementos.create({
         comp_numero,
         comp_complemento,
         comp_bairro,
         comp_ponto_referencia
       });
-
-      const endInDb = await Enderecos.findOne({
-        where: { end_cep }
-      });
- 
+      
       await Pacientes.create({
         pac_nome: pac_nome,
         pac_genero: pac_genero,
