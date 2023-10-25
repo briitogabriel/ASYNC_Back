@@ -6,7 +6,7 @@ class PacientesRouter {
   routesFromPaciente() {
     const pacienteRoutes = Router();
     pacienteRoutes.post("/pacientes", auth, create);
-    pacienteRoutes.put("/pacientes/pacienteId", update);
+    pacienteRoutes.put("/pacientes/:pacienteId", auth, update);
 
     return pacienteRoutes;
   }
