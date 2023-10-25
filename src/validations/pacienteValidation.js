@@ -65,7 +65,39 @@ const pacienteSchema = yup.object().shape({
     
   pac_status: yup
     .boolean()
-    .default(true)
+    .default(true),
+
+    end_cep: yup
+      .string()
+      .required("É obrigatório informar um CEP"),
+
+    end_cidade: yup
+      .string()
+      .required("É obrigatório informar uma cidade"),
+    
+    end_estado: yup
+      .string()
+      .required("É obrigatório informar um Estado"),
+
+    end_logradouro: yup
+      .string()
+      .required("É obrigatório informar um logradouro"),
+
+    comp_numero: yup
+      .string()
+      .required("O número do endereço é obrigatório"),
+
+    comp_complemento: yup
+    .string()
+    .required("É obrigatório informar um complemento"),
+
+    comp_bairro: yup
+      .string()
+      .required("É obrigatório informar um bairro"),
+
+    comp_ponto_referencia: yup
+    .string()
+    .required("É obrigatório informar um ponto de referência"),
 });
 
 module.exports = pacienteSchema;
