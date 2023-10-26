@@ -281,6 +281,31 @@ class PacienteController {
       });
     }
   }
+
+  async remove(req, res) {
+    try {
+      const { pacienteId } = req.params;
+
+      const paciente = await Pacientes.findByPk(pacienteId);
+
+      if (!paciente) {
+        return res.status(404).send({message: "Paciente não encontrado."})
+      };
+
+      await paciente.destroy();
+
+      paciente.pac_status = false;
+      await paciente.save();
+      
+      return res.status(202).send({message: "Paciente removido com sucesso."})
+    } catch (error) {
+      return res.status(500).send({
+        message: "Erro ao remover paciente",
+        cause: error.message,
+      });
+    }
+  }
+
 }
 
 module.exports = new PacienteController();
