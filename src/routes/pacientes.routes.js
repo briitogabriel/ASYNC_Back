@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { auth } = require("../middlewares/auth.middleware");
-const { create, update, findAll } = require("../controllers/paciente.controller");
+const { create, update, findAll, findOne } = require("../controllers/paciente.controller");
 
 class PacientesRouter {
   routesFromPaciente() {
@@ -8,6 +8,7 @@ class PacientesRouter {
     pacienteRoutes.post("/pacientes", auth, create);
     pacienteRoutes.put("/pacientes/:pacienteId", auth, update);
     pacienteRoutes.get("/pacientes", auth, findAll);
+    pacienteRoutes.get("/pacientes/:pacienteId", auth, findOne);
 
     return pacienteRoutes;
   }

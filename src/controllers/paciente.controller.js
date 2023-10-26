@@ -262,6 +262,25 @@ class PacienteController {
       });
     }
   }
+
+  async findOne(req, res) {
+    try {
+      const { pacienteId } = req.params;
+
+      const paciente = await Pacientes.findByPk(pacienteId);
+
+      if (!paciente) {
+        return res.status(404).send({ message: "Paciente não encontrado." });
+      }
+
+      return res.status(200).send(paciente);
+    } catch (error) {
+      return res.status(500).send({
+        message: "Não foi possível processar a sua solicitação",
+        cause: error.message,
+      });
+    }
+  }
 }
 
 module.exports = new PacienteController();
