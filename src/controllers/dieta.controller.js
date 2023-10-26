@@ -83,7 +83,7 @@ class DietaController {
             });
         }
     }
-
+  
     async update(req, res) {
         try {    
           const { dietaId } = req.params;
