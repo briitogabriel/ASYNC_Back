@@ -148,10 +148,10 @@ class PacienteController {
 
       if (!paciente) {
         return res.status(400).send({ message: "Paciente não encontrado." });
-      };
+      }
 
       await pacienteSchema.validate(req.body);
-      
+
       const {
         pac_nome,
         pac_genero,
@@ -180,7 +180,7 @@ class PacienteController {
       } = req.body;
 
       let endereco = await Enderecos.findOne({
-        where: {end_cep}
+        where: { end_cep },
       });
 
       if (!endereco) {
@@ -188,12 +188,17 @@ class PacienteController {
           end_cep,
           end_cidade,
           end_estado,
-          end_logradouro
+          end_logradouro,
         });
-      };
+      }
 
       let complemento = await Complementos.findOne({
-        where: {comp_numero, comp_bairro, comp_complemento, comp_ponto_referencia}
+        where: {
+          comp_numero,
+          comp_bairro,
+          comp_complemento,
+          comp_ponto_referencia,
+        },
       });
 
       if (!complemento) {
@@ -201,9 +206,9 @@ class PacienteController {
           comp_numero,
           comp_complemento,
           comp_bairro,
-          comp_ponto_referencia
-        })
-      };
+          comp_ponto_referencia,
+        });
+      }
 
       paciente.pac_nome = pac_nome;
       paciente.pac_genero = pac_genero;
@@ -226,11 +231,9 @@ class PacienteController {
 
       await paciente.save();
 
-      return res
-        .status(200)
-        .send({
-          message: `Usuário ${paciente.pac_nome} atualizado com sucesso.`,
-        });
+      return res.status(200).send({
+        message: `Usuário ${paciente.pac_nome} atualizado com sucesso.`,
+      });
     } catch (error) {
       if (error.name === "ValidationError") {
         return res.status(400).send({
@@ -242,6 +245,19 @@ class PacienteController {
 
       return res.status(500).send({
         message: "Não foi possível processar a solicitação.",
+        cause: error.message,
+      });
+    }
+  }
+
+  async findAll(req, res) {
+    try {
+      const pacientes = await Pacientes.findAll();
+
+      return res.status(200).send(pacientes);
+    } catch (error) {
+      return res.status(500).send({
+        message: "Erro ao listar pacientes.",
         cause: error.message,
       });
     }
