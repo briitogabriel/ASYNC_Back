@@ -1,4 +1,5 @@
 const { routesFromDietas } = require('./dietas.routes')
+const { routesFromLogs } = require('./logs.routes')
 const { routesFromPaciente } = require('./pacientes.routes')
 const { routesFromProntuario } = require('./prontuarios.routes')
 const { routesFromUsuario } = require('./usuarios.routes')
@@ -10,6 +11,7 @@ routes.use('/api', [
     routesFromDietas(),
     routesFromUsuario(),
     routesFromPaciente(),
+    routesFromLogs(),
     routesFromProntuario(),
 ])
 
