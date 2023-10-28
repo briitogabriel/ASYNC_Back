@@ -2,6 +2,7 @@ const { routesFromDietas } = require('./dietas.routes')
 const { routesFromLogs } = require('./logs.routes')
 const { routesFromPaciente } = require('./pacientes.routes')
 const { routesFromProntuario } = require('./prontuarios.routes')
+const { routesFromEstatisticas } = require('./estatisticas.routes')
 const { routesFromUsuario } = require('./usuarios.routes')
 const { Router } = require('express')
 
@@ -13,6 +14,7 @@ routes.use('/api', [
     routesFromPaciente(),
     routesFromLogs(),
     routesFromProntuario(),
+    routesFromEstatisticas(),
 ])
 
 module.exports = routes
