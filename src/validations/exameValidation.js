@@ -30,8 +30,6 @@ const exameSchema = yup.object().shape({
     .min(16, 'Os resultados devem ter pelo menos 16 caracteres')
     .max(1024, 'Os resultados devem ter no máximo 1024 caracteres')
     .required('Os resultados são obrigatórios'),
-
-  exa_status: yup.boolean().required('O status do sistema é obrigatório'),
 });
 
 module.exports = exameSchema;
