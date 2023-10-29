@@ -174,6 +174,25 @@ class ExameController {
             });
         }
     }
+
+    async findAllByPatient(req, res) {
+        try {
+            const { pacienteId } = req.params;
+            const exames = await Exames.findAll({
+                where: {
+                  pac_id: pacienteId
+                }
+              });
+
+            return res.status(200).send(exames);
+
+        } catch (error) {
+            return res.status(500).send({
+                message: "Erro ao listar exames",
+                cause: error.message,
+            });
+        }
+    }
 }
 
 module.exports = new ExameController();
