@@ -1,12 +1,12 @@
 const { Router } = require('express');
-const { findAll } = require("../controllers/logs.controller");
 const { auth } = require('../middlewares/auth.middleware');
+const { listarLogs } = require('../controllers/logs.controller');
 
 class LogsRouter{
     routesFromLogs() {
         const logRoutes = Router()
-        logRoutes.get('/logs', auth, findAll)
-
+        logRoutes.get('/logs', auth, listarLogs)
+      
         return logRoutes
     }
 }
