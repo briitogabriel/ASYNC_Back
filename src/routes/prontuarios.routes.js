@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { auth } = require("../middlewares/auth.middleware");
-const { create, update, findAll, findOne, remove } = require("../controllers/paciente.controller");
+const { findAll } = require("../controllers/paciente.controller");
 
 class ProntuariosRouter {
   routesFromProntuario() {
