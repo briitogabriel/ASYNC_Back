@@ -16,6 +16,8 @@ class ExameController {
                 exa_url_documento,
                 exa_resultados,
                 pac_id,
+                exa_data,
+                exa_hora,
             } = req.body;
 
             await exameSchema.validate(
@@ -25,13 +27,15 @@ class ExameController {
                   exa_laboratorio,
                   exa_url_documento,
                   exa_resultados,
+                  exa_data,
+                  exa_hora
                 }
             );
 
             const exameCreated = await Exames.create({
                 exa_nome,
-                exa_data: new Date(),
-                exa_hora: new Date(),
+                exa_data: exa_data == null ? new Date() : exa_data,
+                exa_hora: exa_hora == null ? new Date() : exa_hora,
                 exa_tipo,
                 exa_laboratorio,
                 exa_url_documento,
@@ -58,6 +62,24 @@ class ExameController {
         }
     }
 
+    async findOne(req, res) {
+        try {
+          const { exameId } = req.params;
+          const exame = await Exames.findByPk(exameId);
+    
+          if (!exame) {
+            return res.status(404).send({ message: "Exame não encontrado." });
+          }
+    
+          return res.status(200).send(exame);
+        } catch (error) {
+          return res.status(500).send({
+            message: "Não foi possível processar a sua solicitação",
+            cause: error.message,
+          });
+        }
+      }
+
   //implementar a pacienteByExame
 
     async update(req, res) {
@@ -73,7 +95,9 @@ class ExameController {
                 exa_tipo,
                 exa_laboratorio,
                 exa_url_documento,
-                exa_resultados
+                exa_resultados,
+                exa_data,
+                exa_hora,
             } = req.body;
 
             await exameSchema.validate(
@@ -82,7 +106,9 @@ class ExameController {
                   exa_tipo,
                   exa_laboratorio,
                   exa_url_documento,
-                  exa_resultados
+                  exa_resultados,
+                  exa_data,
+                  exa_hora,
                 }
             );
 
@@ -140,6 +166,25 @@ class ExameController {
             const exames = await Exames.findAll({ paranoid: false });
 
             return res.status(200).send({ exames });
+
+        } catch (error) {
+            return res.status(500).send({
+                message: "Erro ao listar exames",
+                cause: error.message,
+            });
+        }
+    }
+
+    async findAllByPatient(req, res) {
+        try {
+            const { pacienteId } = req.params;
+            const exames = await Exames.findAll({
+                where: {
+                  pac_id: pacienteId
+                }
+              });
+
+            return res.status(200).send(exames);
 
         } catch (error) {
             return res.status(500).send({

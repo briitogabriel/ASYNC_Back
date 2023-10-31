@@ -1,9 +1,14 @@
 require('dotenv').config();
 const jwt  = require('jsonwebtoken');
+const auth_enabled = false;
 
 async function auth(req, res, next) {
     try {
         const { authorization } = req.headers;
+
+        if(!auth_enabled){
+            return next();
+        }
         
         if (!authorization) {
             return res.status(401).send({

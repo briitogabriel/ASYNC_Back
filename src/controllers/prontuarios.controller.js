@@ -16,7 +16,12 @@ class ProntuarioController {
       let pacientes;
 
       if (nome) {
-        pacientes = await Pacientes.findAll({ where: { nome: nome } });
+        pacientes = await Pacientes.findAll({   
+          where: {
+            pac_nome: {
+              [Sequelize.Op.like]: `%${nome}%`
+            }
+        } });
       } else if (pacienteId) {
         pacientes = await Pacientes.findByPk(pacienteId);
       } else {
