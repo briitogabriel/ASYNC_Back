@@ -3,8 +3,8 @@ const DB_CONFIG = require("../config/database");
 const sequelize = new Sequelize(DB_CONFIG);
 
 const exercicioSchema = require("../validations/exercicioValidation");
-const Exercicios = require("../models/Exercicios")(sequelize, Sequelize);
-const Pacientes = require("../models/Pacientes")(sequelize, Sequelize);
+const Exercicios = require("../models/exercicios")(sequelize, Sequelize);
+const Pacientes = require("../models/pacientes")(sequelize, Sequelize);
 class ExercicioController {
     async create(req, res) {
         try {

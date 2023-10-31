@@ -3,8 +3,8 @@ const DB_CONFIG = require("../config/database");
 const sequelize = new Sequelize(DB_CONFIG);
 
 const dietaSchema = require("../validations/dietaValidation");
-const Dietas = require('../models/Dietas')(sequelize, Sequelize);
-const Pacientes = require("../models/Pacientes")(sequelize, Sequelize);
+const Dietas = require('../models/dietas')(sequelize, Sequelize);
+const Pacientes = require("../models/pacientes")(sequelize, Sequelize);
 class DietaController {
     async create(req, res) {
         try {
