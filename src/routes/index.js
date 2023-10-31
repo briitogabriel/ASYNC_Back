@@ -6,6 +6,7 @@ const { routesFromProntuario } = require('./prontuarios.routes')
 const { routesFromUsuario } = require('./usuarios.routes')
 const { routesFromExames } = require('./exames.routes')
 const { Router } = require('express')
+const { routesFromConsultas } = require('./consultas.routes')
 
 const routes = new Router()
 
@@ -13,6 +14,7 @@ routes.use('/api', [
     routesFromDietas(),
     routesFromUsuario(),
     routesFromPaciente(),
+    routesFromConsultas(),
     routesFromExercicios(),
     routesFromLogs(),
     routesFromProntuario(),
