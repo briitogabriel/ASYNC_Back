@@ -5,7 +5,7 @@ const sequelize = new Sequelize(DB_CONFIG);
 const { Logs } = require('../models/logs')(sequelize, Sequelize);
 
 class LogsController {
-  async findAll(req, res) {
+  async listarLogs(req, res) {
     try {
       const logs = await Logs.findAll();
 
