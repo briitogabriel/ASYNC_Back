@@ -3,6 +3,7 @@ const { routesFromExercicios } = require('./exercicios.routes')
 const { routesFromLogs } = require('./logs.routes')
 const { routesFromPaciente } = require('./pacientes.routes')
 const { routesFromProntuario } = require('./prontuarios.routes')
+const { routesFromEstatisticas } = require('./estatisticas.routes')
 const { routesFromUsuario } = require('./usuarios.routes')
 const { routesFromExames } = require('./exames.routes')
 const { Router } = require('express')
@@ -19,6 +20,7 @@ routes.use('/api', [
     routesFromLogs(),
     routesFromProntuario(),
     routesFromExames(),
+    routesFromEstatisticas(),
 ])
 
 module.exports = routes

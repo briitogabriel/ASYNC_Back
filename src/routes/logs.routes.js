@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { findAll } = require("../controllers/logs.controller");
 const { auth } = require('../middlewares/auth.middleware');
 const { listarLogs } = require('../controllers/logs.controller');
 
