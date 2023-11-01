@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { auth } = require('../middlewares/auth.middleware');
-const { create, update, remove, findAllAdmin, findOne, findExamesByUser } = require("../controllers/exames.controller");
+const { create, update, remove, findAllAdmin, findOne, findExamesByUser, findAllByPatient } = require("../controllers/exames.controller");
 
 class ExamesRouter{
     routesFromExames() {
@@ -11,7 +11,7 @@ class ExamesRouter{
         exameRoutes.delete('/exames/:exameId',auth, remove)
         exameRoutes.get('/pacientes/:pacienteId/exames',auth, findAllByPatient)
         exameRoutes.get('/exames/admin',auth, findAllAdmin)
-        exameRoutes.get('/exames',auth, findExamesByUser)
+        exameRoutes.get('/exames/',auth, findExamesByUser)
 
         return exameRoutes
     }
