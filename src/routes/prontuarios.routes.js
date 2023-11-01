@@ -5,7 +5,7 @@ const { findAll } = require("../controllers/prontuarios.controller");
 class ProntuariosRouter {
   routesFromProntuario() {
     const prontuarioRoutes = Router();
-    prontuarioRoutes.get("/prontuarios", findAll);
+    prontuarioRoutes.get("/prontuarios", auth, findAll);
     return prontuarioRoutes;
   }
 }

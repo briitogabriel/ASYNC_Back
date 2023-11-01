@@ -5,7 +5,6 @@ const { listarLogs } = require('../controllers/logs.controller');
 class LogsRouter{
     routesFromLogs() {
         const logRoutes = Router()
-
         logRoutes.get('/logs', auth, listarLogs)
 
         return logRoutes
