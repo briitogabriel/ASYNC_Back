@@ -10,7 +10,7 @@ class ConsultasRouter{
     consultaRoutes.get('/consultas/:consultaId', auth, findOne)
     consultaRoutes.get('/consultas/', auth, findAllAdmin)
     consultaRoutes.get('/pacientes/:pacienteId/consultas', auth, findAllByPatient)
-    consultaRoutes.delete('consultas/:consultaId', auth, remove)
+    consultaRoutes.delete('/consultas/:consultaId', auth, remove)
 
     return consultaRoutes
   }

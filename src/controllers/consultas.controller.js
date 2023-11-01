@@ -17,7 +17,6 @@ class ConsultasController{
         con_descricao,
         con_medicacao,
         con_dosagem_precaucoes,
-        con_status,
         pac_id
       } = req.body
 
@@ -28,7 +27,6 @@ class ConsultasController{
         con_descricao,
         con_medicacao,
         con_dosagem_precaucoes,
-        con_status
       })
 
       const consultaCreated = await Consultas.create({
@@ -127,8 +125,7 @@ class ConsultasController{
         con_hora,
         con_descricao,
         con_medicacao,
-        con_dosagem_precaucoes,
-        con_status
+        con_dosagem_precaucoes
       } = req.body;
 
       await consultaSchema.validate(
@@ -138,8 +135,7 @@ class ConsultasController{
           con_hora,
           con_descricao,
           con_medicacao,
-          con_dosagem_precaucoes,
-          con_status
+          con_dosagem_precaucoes
         }
       );
 
@@ -149,7 +145,6 @@ class ConsultasController{
       consulta.con_descricao = con_descricao
       consulta.con_medicacao = con_medicacao
       consulta.con_dosagem_precaucoes = con_dosagem_precaucoes
-      consulta.con_status = con_status
       consulta.updated_at = new Date()
 
       await consulta.save();
