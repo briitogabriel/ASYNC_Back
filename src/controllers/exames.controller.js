@@ -4,7 +4,7 @@ const sequelize = new Sequelize(DB_CONFIG);
 
 const exameSchema = require("../validations/exameValidation");
 const Exames = require('../models/exames')(sequelize, Sequelize);
-//importar pacientes
+const Pacientes = require('../models/pacientes')(sequelize, Sequelize);
 
 class ExameController {
     async create(req, res) {
@@ -79,8 +79,6 @@ class ExameController {
           });
         }
       }
-
-  //implementar a pacienteByExame
 
     async update(req, res) {
         try {
@@ -160,6 +158,31 @@ class ExameController {
             });
         }
     }
+
+    async findExamesByUser(req, res) {
+        try {
+            const { userName } = req.query;
+    
+            if (!userName) {
+                const exames = await Exames.findAll();
+                return res.status(200).send(exames);
+            } else {
+                const exames = await Exames.findAll({
+                    where: {
+                        usu_nome: userName,
+                    },
+                });
+    
+                return res.status(200).send(exames);
+            }
+        } catch (error) {
+            return res.status(500).send({
+                message: "Erro ao buscar os exames do usuário",
+                cause: error.message,
+            });
+        }
+    }
+    
 
     async findAllAdmin(req, res) {
         try {

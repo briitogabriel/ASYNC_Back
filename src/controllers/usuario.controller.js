@@ -5,6 +5,7 @@ const DB_CONFIG = require("../config/database");
 const usuarioSchema = require("../validations/usuarioValidation");
 const sequelize = new Sequelize(DB_CONFIG);
 const Usuarios = require("../models/usuarios")(sequelize, Sequelize);
+const Permissoes = require("../models/permissoes")(sequelize, Sequelize);
 
 class UsuarioController {
   async login(req, res) {
@@ -118,7 +119,7 @@ class UsuarioController {
         usu_email,
         usu_senha,
         usu_status,
-        per_id,
+        per_nome,
       } = req.body;
 
       await usuarioSchema.validate({
@@ -130,6 +131,8 @@ class UsuarioController {
         usu_senha,
         usu_status,
       });
+
+      const permissao = await Permissoes.findOne({where: {per_nome}});
 
       const cpfInDb = await Usuarios.findOne({
         where: { usu_cpf: usu_cpf },
@@ -155,7 +158,7 @@ class UsuarioController {
         usu_status: usu_status,
         usu_campo_busca:
           usu_nome + " | " + usu_cpf + " | " + usu_telefone + " | " + usu_email,
-        per_id: per_id,
+        per_id: permissao.per_id,
       });
 
       return res.status(201).send({
