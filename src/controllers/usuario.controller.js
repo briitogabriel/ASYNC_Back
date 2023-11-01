@@ -181,7 +181,7 @@ class UsuarioController {
         usu_telefone,
         usu_email,
         usu_senha,
-        per_id,
+        per_nome,
       } = req.body;
 
       await usuarioSchema.validate({
@@ -205,11 +205,13 @@ class UsuarioController {
         return res.status(400).send({ message: "Senha incorreta." });
       }
 
+      const permissao = await Permissoes.findOne({where: {per_nome}});
+
       usuario.usu_nome = usu_nome;
       usuario.usu_genero = usu_genero;
       usuario.usu_telefone = usu_telefone;
       usuario.usu_email = usu_email;
-      usuario.per_id = per_id;
+      usuario.per_id = permissao.per_id;
       usuario.usu_campo_busca = usu_nome + " | " + usuario.usu_cpf + " | " + usu_telefone + " | " + usu_email;
 
       await usuario.save();
