@@ -9,6 +9,7 @@ class ExamesRouter{
         exameRoutes.put('/exames/:exameId',auth, update)
         exameRoutes.get('/exames/:exameId',auth, findOne)
         exameRoutes.delete('/exames/:exameId',auth, remove)
+        exameRoutes.get('/pacientes/:pacienteId/exames',auth, findAllByPatient)
         exameRoutes.get('/exames/admin',auth, findAllAdmin)
         exameRoutes.get('/exames',auth, findExamesByUser)
 
