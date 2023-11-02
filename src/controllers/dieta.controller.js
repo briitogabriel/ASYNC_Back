@@ -57,7 +57,7 @@ class DietaController {
 
     async findAllByPatient(req, res) {
         try {
-            const { pac_nome } = req.body
+            const { pac_nome } = req.params
             const patientData = !pac_nome ? '' : await Pacientes.findAll({ where: {
                 pac_nome: {
                     [Op.iLike]: `%${pac_nome}%`
