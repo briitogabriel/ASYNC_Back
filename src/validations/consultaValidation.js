@@ -3,7 +3,7 @@ const yup = require('yup');
 const consultaSchema = yup.object().shape({
   con_motivo: yup
     .string()
-    .min(8, 'O motivo da consulta deve ter pelo menos 5 caracteres')
+    .min(8, 'O motivo da consulta deve ter pelo menos 8 caracteres')
     .max(64, 'O motivo da consulta deve ter no máximo 64 caracteres')
     .required('O motivo da consulta é obrigatório'),
 

@@ -8,6 +8,7 @@ const { routesFromUsuario } = require('./usuarios.routes')
 const { routesFromExames } = require('./exames.routes')
 const { Router } = require('express')
 const { routesFromConsultas } = require('./consultas.routes')
+const { routesFromMedicamentos } = require('./medicamentos.routes')
 
 const routes = new Router()
 
@@ -21,6 +22,7 @@ routes.use('/api', [
     routesFromProntuario(),
     routesFromExames(),
     routesFromEstatisticas(),
+    routesFromMedicamentos()
 ])
 
 module.exports = routes
