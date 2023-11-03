@@ -15,7 +15,7 @@ const medicamentoSchema = yup.object().shape({
   .string()
   .oneOf(
     ['Cápsula', 'Comprimido', 'Líquido', 'Creme', 'Gel', 'Inalação', 'Injeção', 'Spray'],
-    'Tipo de dieta inválido'
+    'Tipo de medicamento inválido'
   )
   .required('O tipo do medicamento é obrigatório'),
 
@@ -29,7 +29,7 @@ const medicamentoSchema = yup.object().shape({
     .string()
     .oneOf(
       ['mg', 'mcg', 'g', 'mL', '%'],
-      'Tipo de dieta inválido'
+      'Unidade de medida inválida'
       )
     .required('A unidade do medicamento é obrigatória'),    
 
