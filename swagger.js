@@ -31,7 +31,7 @@ const docDefinition = {
   definitions: {
     "userLogin200": {
       "message": "Usuário autenticado com sucesso.",
-      "data": "jwtToken",
+      "data": { "token": "JWT Token", "user": "John Doe" },
       "success": true
     },
     "userLogin400": {
