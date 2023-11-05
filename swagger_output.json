@@ -1,0 +1,5338 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "ASYNC Lab API",
+    "description": "Documentação da <b>SQUAD4 - ASYNC</b>, gerada automaticamente com <b>swagger-autogen</b>"
+  },
+  "host": "localhost:3333",
+  "basePath": "/api/",
+  "tags": [
+    {
+      "name": "Autenticação",
+      "description": "Endpoints de Autenticação"
+    },
+    {
+      "name": "Usuários",
+      "description": "Endpoints de requisições de Usuários"
+    },
+    {
+      "name": "Consultas",
+      "description": "Endpoints de requisições de Consultas"
+    },
+    {
+      "name": "Dietas",
+      "description": "Endpoints de requisições de Dietas"
+    },
+    {
+      "name": "Estatísticas",
+      "description": "Endpoints de requisições de Estatísticas"
+    },
+    {
+      "name": "Exames",
+      "description": "Endpoints de requisições de Exames"
+    },
+    {
+      "name": "Exercícios",
+      "description": "Endpoints de requisições de Exercícios"
+    },
+    {
+      "name": "Logs",
+      "description": "Endpoints de requisições de Logs"
+    },
+    {
+      "name": "Medicamentos",
+      "description": "Endpoints de requisições de Medicamentos"
+    },
+    {
+      "name": "Pacientes",
+      "description": "Endpoints de requisições de Pacientes"
+    },
+    {
+      "name": "Prontuários",
+      "description": "Endpoints de requisições de Prontuários"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/consultas": {
+      "post": {
+        "tags": [
+          "Consultas"
+        ],
+        "summary": "Criar uma nova consulta",
+        "description": "Endpoint para criar uma nova consulta.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados da nova consulta",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "con_motivo": {
+                  "type": "string",
+                  "example": "Exame de rotina"
+                },
+                "con_data": {
+                  "type": "string",
+                  "example": "2023-11-05"
+                },
+                "con_hora": {
+                  "type": "string",
+                  "example": "09:00:00"
+                },
+                "con_descricao": {
+                  "type": "string",
+                  "example": "Consulta de rotina"
+                },
+                "con_medicacao": {
+                  "type": "string",
+                  "example": "Paracetamol"
+                },
+                "con_dosagem_precaucoes": {
+                  "type": "string",
+                  "example": "500mg, tomar com comida"
+                },
+                "pac_id": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Consulta criada com sucesso",
+            "schema": {
+              "$ref": "#/definitions/consultaCreate201"
+            }
+          },
+          "400": {
+            "description": "Requisição inválida, dados de consulta ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/consultaCreate400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/consultaCreate500"
+            }
+          }
+        }
+      }
+    },
+    "/consultas/{consultaId}": {
+      "put": {
+        "tags": [
+          "Consultas"
+        ],
+        "summary": "Atualizar uma consulta",
+        "description": "Endpoint para atualizar uma consulta por meio de seu ID.",
+        "parameters": [
+          {
+            "name": "consultaId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da consulta a ser atualizada."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados de atualização da consulta",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "con_motivo": {
+                  "type": "string",
+                  "example": "Consulta de rotina"
+                },
+                "con_data": {
+                  "type": "string",
+                  "example": "2023-11-06"
+                },
+                "con_hora": {
+                  "type": "string",
+                  "example": "10:00:00"
+                },
+                "con_descricao": {
+                  "type": "string",
+                  "example": "Consulta de rotina atualizada"
+                },
+                "con_medicacao": {
+                  "type": "string",
+                  "example": "Ibuprofeno"
+                },
+                "con_dosagem_precaucoes": {
+                  "type": "string",
+                  "example": "400mg, tomar com água"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Consulta atualizada com sucesso",
+            "schema": {
+              "$ref": "#/definitions/consultaUpdate201"
+            }
+          },
+          "400": {
+            "description": "Requisição inválida, dados de consulta ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/consultaUpdate400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Consulta não encontrada",
+            "schema": {
+              "$ref": "#/definitions/consultaUpdate404"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/consultaUpdate500"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Consultas"
+        ],
+        "summary": "Buscar consulta por ID",
+        "description": "Endpoint para buscar uma consulta pelo ID.",
+        "parameters": [
+          {
+            "name": "consultaId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da consulta a ser buscada."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta encontrada",
+            "schema": {
+              "$ref": "#/definitions/consultaFindOne200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Consulta não encontrada",
+            "schema": {
+              "$ref": "#/definitions/consultaFindOne404"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/consultaFindOne500"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Consultas"
+        ],
+        "summary": "Remover uma consulta",
+        "description": "Endpoint para   uma consulta por meio de seu ID.",
+        "parameters": [
+          {
+            "name": "consultaId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da consulta a ser removida."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados de confirmação para remover a consulta",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 2
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Consulta removida com sucesso"
+          },
+          "400": {
+            "description": "Requisição inválida, dados de remoção ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/consultaRemove400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/consultaRemove500"
+            }
+          }
+        }
+      }
+    },
+    "/consultas/": {
+      "get": {
+        "tags": [
+          "Consultas"
+        ],
+        "summary": "Listar todas as consultas (Admin)",
+        "description": "Endpoint para listar todas as consultas (Admin).",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de todas as consultas",
+            "schema": {
+              "$ref": "#/definitions/consultaFindAllAdmin200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/consultaFindAllAdmin500"
+            }
+          }
+        }
+      }
+    },
+    "/pacientes/{pacienteId}/consultas": {
+      "get": {
+        "tags": [
+          "Consultas"
+        ],
+        "summary": "Listar consultas por ID do paciente",
+        "description": "Endpoint para listar consultas por ID do paciente.",
+        "parameters": [
+          {
+            "name": "pacienteId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do paciente."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de consultas por ID do paciente",
+            "schema": {
+              "$ref": "#/definitions/consultaFindAllByPatient200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/consultaFindAllByPatient500"
+            }
+          }
+        }
+      }
+    },
+    "/dietas": {
+      "post": {
+        "tags": [
+          "Dietas"
+        ],
+        "summary": "Criar uma nova dieta",
+        "description": "Endpoint para criar uma nova dieta.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados da nova dieta",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "die_nome": {
+                  "type": "string",
+                  "example": "Dieta de rotina"
+                },
+                "die_data": {
+                  "type": "string",
+                  "example": "2023-11-05"
+                },
+                "die_hora": {
+                  "type": "string",
+                  "example": "09:00:00"
+                },
+                "die_tipo": {
+                  "type": "string",
+                  "example": "Dieta balanceada"
+                },
+                "die_descricao": {
+                  "type": "string",
+                  "example": "Dieta para controle de peso"
+                },
+                "pac_id": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Dieta criada com sucesso",
+            "schema": {
+              "$ref": "#/definitions/dietaCreate201"
+            }
+          },
+          "400": {
+            "description": "Requisição inválida, dados de dieta ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/dietaCreate400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/dietaCreate500"
+            }
+          }
+        }
+      }
+    },
+    "/dietas/{pac_nome}": {
+      "get": {
+        "tags": [
+          "Dietas"
+        ],
+        "summary": "Listar dietas por nome do paciente",
+        "description": "Endpoint para listar dietas por nome do paciente.",
+        "parameters": [
+          {
+            "name": "pac_nome",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Nome do paciente a ser buscado."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de dietas por nome do paciente",
+            "schema": {
+              "$ref": "#/definitions/dietaFindAllByPatient200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/dietaFindAllByPatient500"
+            }
+          }
+        }
+      }
+    },
+    "/dietas/{dietaId}": {
+      "put": {
+        "tags": [
+          "Dietas"
+        ],
+        "summary": "Atualizar uma dieta",
+        "description": "Endpoint para atualizar uma dieta por meio de seu ID.",
+        "parameters": [
+          {
+            "name": "dietaId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da dieta a ser atualizada."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados de atualização da dieta",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "die_nome": {
+                  "type": "string",
+                  "example": "Dieta atualizada"
+                },
+                "die_data": {
+                  "type": "string",
+                  "example": "2023-11-06"
+                },
+                "die_hora": {
+                  "type": "string",
+                  "example": "10:00:00"
+                },
+                "die_tipo": {
+                  "type": "string",
+                  "example": "Dieta modificada"
+                },
+                "die_descricao": {
+                  "type": "string",
+                  "example": "Dieta para controle de peso atualizada"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Dieta atualizada com sucesso",
+            "schema": {
+              "$ref": "#/definitions/dietaUpdate201"
+            }
+          },
+          "400": {
+            "description": "Requisição inválida, dados de dieta ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/dietaUpdate400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Dieta não encontrada",
+            "schema": {
+              "$ref": "#/definitions/dietaUpdate404"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/dietaUpdate500"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Dietas"
+        ],
+        "summary": "Remover uma dieta",
+        "description": "Endpoint para   uma dieta por meio de seu ID.",
+        "parameters": [
+          {
+            "name": "dietaId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID da dieta a ser removida."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados de confirmação para remover a dieta",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 2
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Dieta removida com sucesso"
+          },
+          "400": {
+            "description": "Requisição inválida, dados de remoção ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/dietaRemove400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/dietaRemove500"
+            }
+          }
+        }
+      }
+    },
+    "/dietas/admin": {
+      "get": {
+        "tags": [
+          "Dietas"
+        ],
+        "summary": "Listar todas as dietas (Admin)",
+        "description": "Endpoint para listar todas as dietas (Admin).",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de todas as dietas",
+            "schema": {
+              "$ref": "#/definitions/dietaFindAllAdmin200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/dietaFindAllAdmin500"
+            }
+          }
+        }
+      }
+    },
+    "/estatisticas": {
+      "get": {
+        "tags": [
+          "Estatísticas"
+        ],
+        "summary": "Obter estatísticas gerais",
+        "description": "Endpoint para obter estatísticas gerais, como o total de pacientes, consultas e exames.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Estatísticas gerais",
+            "schema": {
+              "$ref": "#/definitions/statisticsFindAll200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/statisticsFindAll500"
+            }
+          }
+        }
+      }
+    },
+    "/exames": {
+      "post": {
+        "tags": [
+          "Exames"
+        ],
+        "summary": "Criar um novo exame",
+        "description": "Endpoint para criar um novo exame.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados do novo exame",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "exa_nome": {
+                  "type": "string",
+                  "example": "Nome do Exame"
+                },
+                "exa_tipo": {
+                  "type": "string",
+                  "example": "Tipo do Exame"
+                },
+                "exa_laboratorio": {
+                  "type": "string",
+                  "example": "Nome do Laboratório"
+                },
+                "exa_url_documento": {
+                  "type": "string",
+                  "example": "URL do Documento"
+                },
+                "exa_resultados": {
+                  "type": "string",
+                  "example": "Resultados do Exame"
+                },
+                "exa_data": {
+                  "type": "string",
+                  "example": "Data do Exame"
+                },
+                "exa_hora": {
+                  "type": "string",
+                  "example": "Hora do Exame"
+                },
+                "pac_id": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Exame criado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/examCreate201"
+            }
+          },
+          "400": {
+            "description": "Requisição inválida, dados de exame ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/examCreate400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/examCreate500"
+            }
+          }
+        }
+      }
+    },
+    "/exames/{exameId}": {
+      "put": {
+        "tags": [
+          "Exames"
+        ],
+        "summary": "Atualizar um exame",
+        "description": "Endpoint para atualizar um exame pelo ID.",
+        "parameters": [
+          {
+            "name": "exameId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do exame a ser atualizado."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados de atualização do exame",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "exa_nome": {
+                  "type": "string",
+                  "example": "Nome do Exame Atualizado"
+                },
+                "exa_tipo": {
+                  "type": "string",
+                  "example": "Tipo do Exame Atualizado"
+                },
+                "exa_laboratorio": {
+                  "type": "string",
+                  "example": "Nome do Laboratório Atualizado"
+                },
+                "exa_url_documento": {
+                  "type": "string",
+                  "example": "URL do Documento Atualizado"
+                },
+                "exa_resultados": {
+                  "type": "string",
+                  "example": "Resultados do Exame Atualizados"
+                },
+                "exa_data": {
+                  "type": "string",
+                  "example": "Data do Exame Atualizada"
+                },
+                "exa_hora": {
+                  "type": "string",
+                  "example": "Hora do Exame Atualizada"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Exame atualizado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/examUpdate201"
+            }
+          },
+          "400": {
+            "description": "Requisição inválida, dados de exame ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/examUpdate400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Exame não encontrado",
+            "schema": {
+              "$ref": "#/definitions/examUpdate404"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/examUpdate500"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Exames"
+        ],
+        "summary": "Obter detalhes de um exame",
+        "description": "Endpoint para obter detalhes de um exame pelo ID.",
+        "parameters": [
+          {
+            "name": "exameId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do exame."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do exame",
+            "schema": {
+              "$ref": "#/definitions/examFindOne200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Exame não encontrado",
+            "schema": {
+              "$ref": "#/definitions/examFindOne404"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/examFindOne500"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Exames"
+        ],
+        "summary": "Remover um exame",
+        "description": "Endpoint para   um exame pelo ID.",
+        "parameters": [
+          {
+            "name": "exameId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do exame a ser removido."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados de confirmação para remover o exame",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 2
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exame removido com sucesso"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "description": "Requisição inválida, dados de remoção ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/examRemove400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/examRemove500"
+            }
+          }
+        }
+      }
+    },
+    "/pacientes/{pacienteId}/exames": {
+      "get": {
+        "tags": [
+          "Exames"
+        ],
+        "summary": "Listar exames de um paciente",
+        "description": "Endpoint para listar exames de um paciente com base no ID do paciente.",
+        "parameters": [
+          {
+            "name": "pacienteId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do paciente para listar exames."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de exames do paciente",
+            "schema": {
+              "$ref": "#/definitions/examFindAllByPatient200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/examFindAllByPatient500"
+            }
+          }
+        }
+      }
+    },
+    "/exames/admin": {
+      "get": {
+        "tags": [
+          "Exames"
+        ],
+        "summary": "Listar todos os exames (Admin)",
+        "description": "Endpoint para listar todos os exames cadastrados, incluindo os arquivados (Admin).",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de todos os exames cadastrados (Admin)",
+            "schema": {
+              "$ref": "#/definitions/examFindAllAdmin200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/examFindAllAdmin500"
+            }
+          }
+        }
+      }
+    },
+    "/exames/": {
+      "get": {
+        "tags": [
+          "Exames"
+        ],
+        "summary": "Encontrar exames por nome de usuário",
+        "description": "Endpoint para encontrar exames com base no nome do usuário.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "userName",
+            "in": "query",
+            "type": "string",
+            "description": "Nome do usuário para pesquisa."
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "schema",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de exames encontrados",
+            "schema": {
+              "$ref": "#/definitions/examFindExamsByUser200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/examFindExamsByUser500"
+            }
+          }
+        }
+      }
+    },
+    "/exercicios": {
+      "post": {
+        "tags": [
+          "Exercícios"
+        ],
+        "summary": "Criar um novo exercício",
+        "description": "Endpoint para criar um novo exercício.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados do novo exercício",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "exe_nome": {
+                  "type": "string",
+                  "example": "Nome do Exercício"
+                },
+                "exe_data": {
+                  "type": "string",
+                  "example": "Data do Exercício"
+                },
+                "exe_hora": {
+                  "type": "string",
+                  "example": "Hora do Exercício"
+                },
+                "exe_tipo": {
+                  "type": "string",
+                  "example": "Tipo do Exercício"
+                },
+                "exe_descricao": {
+                  "type": "string",
+                  "example": "Descrição do Exercício"
+                },
+                "exe_qtd": {
+                  "type": "number",
+                  "example": 1
+                },
+                "pac_id": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Exercício criado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/exerciseCreate201"
+            }
+          },
+          "400": {
+            "description": "Requisição inválida, dados de exercício ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/exerciseCreate400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/exerciseCreate500"
+            }
+          }
+        }
+      }
+    },
+    "/exercicios/{pac_nome}": {
+      "get": {
+        "tags": [
+          "Exercícios"
+        ],
+        "summary": "Listar exercícios de um paciente",
+        "description": "Endpoint para listar exercícios de um paciente com base no nome do paciente.",
+        "parameters": [
+          {
+            "name": "pac_nome",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Nome do paciente para pesquisa."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de exercícios do paciente",
+            "schema": {
+              "$ref": "#/definitions/exerciseFindAllByPatient200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/exerciseFindAllByPatient500"
+            }
+          }
+        }
+      }
+    },
+    "/exercicios/{exercicioId}": {
+      "put": {
+        "tags": [
+          "Exercícios"
+        ],
+        "summary": "Atualizar um exercício",
+        "description": "Endpoint para atualizar um exercício pelo ID.",
+        "parameters": [
+          {
+            "name": "exercicioId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do exercício a ser atualizado."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados de atualização do exercício",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "exe_nome": {
+                  "type": "string",
+                  "example": "Nome do Exercício Atualizado"
+                },
+                "exe_data": {
+                  "type": "string",
+                  "example": "Data do Exercício Atualizada"
+                },
+                "exe_hora": {
+                  "type": "string",
+                  "example": "Hora do Exercício Atualizada"
+                },
+                "exe_tipo": {
+                  "type": "string",
+                  "example": "Tipo do Exercício Atualizado"
+                },
+                "exe_descricao": {
+                  "type": "string",
+                  "example": "Descrição do Exercício Atualizada"
+                },
+                "exe_qtd": {
+                  "type": "number",
+                  "example": 2
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Exercício atualizado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/exerciseUpdate201"
+            }
+          },
+          "400": {
+            "description": "Requisição inválida, dados de exercício ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/exerciseUpdate400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Exercício não encontrado",
+            "schema": {
+              "$ref": "#/definitions/exerciseUpdate404"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/exerciseUpdate500"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Exercícios"
+        ],
+        "summary": "Remover um exercício",
+        "description": "Endpoint para   um exercício pelo ID.",
+        "parameters": [
+          {
+            "name": "exercicioId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do exercício a ser removido."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados de confirmação para remover o exercício",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 2
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exercício removido com sucesso"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "description": "Requisição inválida, dados de remoção ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/exerciseRemove400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/exerciseRemove500"
+            }
+          }
+        }
+      }
+    },
+    "/exercicios/admin": {
+      "get": {
+        "tags": [
+          "Exercícios"
+        ],
+        "summary": "Listar todos os exercícios (Admin)",
+        "description": "Endpoint para listar todos os exercícios cadastrados, incluindo os arquivados (Admin).",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de todos os exercícios cadastrados (Admin)",
+            "schema": {
+              "$ref": "#/definitions/exerciseFindAllAdmin200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/exerciseFindAllAdmin500"
+            }
+          }
+        }
+      }
+    },
+    "/logs": {
+      "get": {
+        "tags": [
+          "Logs"
+        ],
+        "summary": "Listar registros de logs",
+        "description": "Endpoint para listar os registros de logs.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de registros de logs",
+            "schema": {
+              "$ref": "#/definitions/logsList200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/logsList500"
+            }
+          }
+        }
+      }
+    },
+    "/medicamentos": {
+      "post": {
+        "tags": [
+          "Medicamentos"
+        ],
+        "summary": "Criar um novo medicamento",
+        "description": "Endpoint para criar um novo medicamento.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados do novo medicamento",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "med_nome": {
+                  "type": "string",
+                  "example": "Medicamento X"
+                },
+                "med_data": {
+                  "type": "string",
+                  "example": "2023-11-10"
+                },
+                "med_hora": {
+                  "type": "string",
+                  "example": "08:00"
+                },
+                "med_tipo": {
+                  "type": "string",
+                  "example": "Comprimido"
+                },
+                "med_descricao": {
+                  "type": "string",
+                  "example": "Descrição do medicamento"
+                },
+                "med_qtd": {
+                  "type": "number",
+                  "example": 1
+                },
+                "med_unidade": {
+                  "type": "string",
+                  "example": "unidade"
+                },
+                "med_observacoes": {
+                  "type": "string",
+                  "example": "Observações do medicamento"
+                },
+                "pac_id": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Medicamento criado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/medicamentoCreate201"
+            }
+          },
+          "400": {
+            "description": "Requisição inválida, dados de medicamento ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/medicamentoCreate400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/medicamentoCreate500"
+            }
+          }
+        }
+      }
+    },
+    "/medicamentos/{medicamentoId}": {
+      "put": {
+        "tags": [
+          "Medicamentos"
+        ],
+        "summary": "Atualizar um medicamento",
+        "description": "Endpoint para atualizar um medicamento por meio de seu ID.",
+        "parameters": [
+          {
+            "name": "medicamentoId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do medicamento a ser atualizado."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados de atualização do medicamento",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "med_nome": {
+                  "type": "string",
+                  "example": "Medicamento Y"
+                },
+                "med_data": {
+                  "type": "string",
+                  "example": "2023-11-11"
+                },
+                "med_hora": {
+                  "type": "string",
+                  "example": "12:00"
+                },
+                "med_tipo": {
+                  "type": "string",
+                  "example": "Gotas"
+                },
+                "med_descricao": {
+                  "type": "string",
+                  "example": "Nova descrição do medicamento"
+                },
+                "med_qtd": {
+                  "type": "number",
+                  "example": 2
+                },
+                "med_unidade": {
+                  "type": "string",
+                  "example": "ml"
+                },
+                "med_observacoes": {
+                  "type": "string",
+                  "example": "Novas observações do medicamento"
+                },
+                "pac_id": {
+                  "type": "number",
+                  "example": 2
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Medicamento atualizado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/medicamentoUpdate200"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Requisição inválida, dados de medicamento ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/medicamentoUpdate400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Medicamento não encontrado",
+            "schema": {
+              "$ref": "#/definitions/medicamentoUpdate404"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/medicamentoUpdate500"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Medicamentos"
+        ],
+        "summary": "Encontrar um medicamento",
+        "description": "Endpoint para encontrar um medicamento por seu ID.",
+        "parameters": [
+          {
+            "name": "medicamentoId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do medicamento a ser encontrado."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Medicamento encontrado",
+            "schema": {
+              "$ref": "#/definitions/medicamentoFindOne200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Medicamento não encontrado",
+            "schema": {
+              "$ref": "#/definitions/medicamentoFindOne404"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/medicamentoFindOne500"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Medicamentos"
+        ],
+        "summary": "Remover um medicamento",
+        "description": "Endpoint para   um medicamento por meio de seu ID.",
+        "parameters": [
+          {
+            "name": "medicamentoId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do medicamento a ser removido."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Medicamento removido com sucesso"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "description": "Requisição inválida, dados de remoção ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/medicamentoRemove400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/medicamentoRemove500"
+            }
+          }
+        }
+      }
+    },
+    "/pacientes/{pacienteId}/medicamentos": {
+      "get": {
+        "tags": [
+          "Medicamentos"
+        ],
+        "summary": "Listar medicamentos por paciente",
+        "description": "Endpoint para listar medicamentos de um paciente por meio de seu ID.",
+        "parameters": [
+          {
+            "name": "pacienteId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do paciente para listar medicamentos."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de medicamentos do paciente",
+            "schema": {
+              "$ref": "#/definitions/medicamentoFindAllByPatient200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/medicamentoFindAllByPatient500"
+            }
+          }
+        }
+      }
+    },
+    "/medicamentos/": {
+      "get": {
+        "tags": [
+          "Medicamentos"
+        ],
+        "summary": "Encontrar medicamentos de um usuário",
+        "description": "Endpoint para encontrar medicamentos de um usuário por seu nome.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "userName",
+            "in": "query",
+            "type": "string",
+            "description": "Nome do usuário para buscar medicamentos."
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "schema",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Medicamentos encontrados",
+            "schema": {
+              "$ref": "#/definitions/medicamentoFindMedicamentosByUser200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/medicamentoFindMedicamentosByUser500"
+            }
+          }
+        }
+      }
+    },
+    "/pacientes": {
+      "post": {
+        "tags": [
+          "Pacientes"
+        ],
+        "summary": "Criar um novo paciente",
+        "description": "Endpoint para criar um novo paciente.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados do novo paciente",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pac_nome": {
+                  "type": "string",
+                  "example": "João da Silva"
+                },
+                "pac_genero": {
+                  "type": "string",
+                  "example": "Masculino"
+                },
+                "pac_nascimento": {
+                  "type": "string",
+                  "example": "1990-01-01"
+                },
+                "pac_cpf": {
+                  "type": "string",
+                  "example": "12345678901"
+                },
+                "pac_rg": {
+                  "type": "string",
+                  "example": "1234567"
+                },
+                "pac_estado_civil": {
+                  "type": "string",
+                  "example": "Casado"
+                },
+                "pac_telefone": {
+                  "type": "string",
+                  "example": "1234567890"
+                },
+                "pac_email": {
+                  "type": "string",
+                  "example": "joao.silva@example.com"
+                },
+                "pac_naturalidade": {
+                  "type": "string",
+                  "example": "São Paulo"
+                },
+                "pac_contato_emergencia": {
+                  "type": "string",
+                  "example": "Maria da Silva"
+                },
+                "pac_alergias": {
+                  "type": "string",
+                  "example": "Nenhuma"
+                },
+                "pac_cuidados_especiais": {
+                  "type": "string",
+                  "example": "Nenhum"
+                },
+                "pac_convenio": {
+                  "type": "string",
+                  "example": "Unimed"
+                },
+                "pac_numero_convenio": {
+                  "type": "string",
+                  "example": "12345"
+                },
+                "pac_validade_convenio": {
+                  "type": "string",
+                  "example": "2023-12-31"
+                },
+                "end_cep": {
+                  "type": "string",
+                  "example": "12345-678"
+                },
+                "end_cidade": {
+                  "type": "string",
+                  "example": "São Paulo"
+                },
+                "end_estado": {
+                  "type": "string",
+                  "example": "SP"
+                },
+                "end_logradouro": {
+                  "type": "string",
+                  "example": "Avenida Principal"
+                },
+                "comp_numero": {
+                  "type": "string",
+                  "example": "123"
+                },
+                "comp_complemento": {
+                  "type": "string",
+                  "example": "Apartamento 4B"
+                },
+                "comp_bairro": {
+                  "type": "string",
+                  "example": "Centro"
+                },
+                "comp_ponto_referencia": {
+                  "type": "string",
+                  "example": "Próximo ao mercado"
+                },
+                "usu_id": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Paciente criado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/pacienteCreate201"
+            }
+          },
+          "400": {
+            "description": "Requisição inválida, dados de paciente ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/pacienteCreate400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Paciente já cadastrado",
+            "schema": {
+              "$ref": "#/definitions/pacienteCreate409"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/pacienteCreate500"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Pacientes"
+        ],
+        "summary": "Listar todos os pacientes",
+        "description": "Endpoint para listar todos os pacientes cadastrados.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de pacientes",
+            "schema": {
+              "$ref": "#/definitions/pacienteFindAll200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/pacienteFindAll500"
+            }
+          }
+        }
+      }
+    },
+    "/pacientes/{pacienteId}": {
+      "put": {
+        "tags": [
+          "Pacientes"
+        ],
+        "summary": "Atualizar um paciente",
+        "description": "Endpoint para atualizar um paciente por meio de seu ID.",
+        "parameters": [
+          {
+            "name": "pacienteId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do paciente a ser atualizado."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados de atualização do paciente",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pac_nome": {
+                  "type": "string",
+                  "example": "João da Silva"
+                },
+                "pac_genero": {
+                  "type": "string",
+                  "example": "Masculino"
+                },
+                "pac_nascimento": {
+                  "type": "string",
+                  "example": "1990-01-01"
+                },
+                "pac_cpf": {
+                  "type": "string",
+                  "example": "12345678901"
+                },
+                "pac_rg": {
+                  "type": "string",
+                  "example": "1234567"
+                },
+                "pac_estado_civil": {
+                  "type": "string",
+                  "example": "Casado"
+                },
+                "pac_telefone": {
+                  "type": "string",
+                  "example": "1234567890"
+                },
+                "pac_email": {
+                  "type": "string",
+                  "example": "joao.silva@example.com"
+                },
+                "pac_naturalidade": {
+                  "type": "string",
+                  "example": "São Paulo"
+                },
+                "pac_contato_emergencia": {
+                  "type": "string",
+                  "example": "Maria da Silva"
+                },
+                "pac_alergias": {
+                  "type": "string",
+                  "example": "Nenhuma"
+                },
+                "pac_cuidados_especiais": {
+                  "type": "string",
+                  "example": "Nenhum"
+                },
+                "pac_convenio": {
+                  "type": "string",
+                  "example": "Unimed"
+                },
+                "pac_numero_convenio": {
+                  "type": "string",
+                  "example": "12345"
+                },
+                "pac_validade_convenio": {
+                  "type": "string",
+                  "example": "2023-12-31"
+                },
+                "pac_status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "end_cep": {
+                  "type": "string",
+                  "example": "12345-678"
+                },
+                "end_cidade": {
+                  "type": "string",
+                  "example": "São Paulo"
+                },
+                "end_estado": {
+                  "type": "string",
+                  "example": "SP"
+                },
+                "end_logradouro": {
+                  "type": "string",
+                  "example": "Avenida Principal"
+                },
+                "comp_numero": {
+                  "type": "string",
+                  "example": "123"
+                },
+                "comp_complemento": {
+                  "type": "string",
+                  "example": "Apartamento 4B"
+                },
+                "comp_bairro": {
+                  "type": "string",
+                  "example": "Centro"
+                },
+                "comp_ponto_referencia": {
+                  "type": "string",
+                  "example": "Próximo ao mercado"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paciente atualizado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/pacienteUpdate200"
+            }
+          },
+          "400": {
+            "description": "Requisição inválida, dados de paciente ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/pacienteUpdate400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/pacienteUpdate500"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Pacientes"
+        ],
+        "summary": "Buscar um paciente por ID",
+        "description": "Endpoint para buscar um paciente por meio de seu ID.",
+        "parameters": [
+          {
+            "name": "pacienteId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do paciente a ser buscado."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Paciente encontrado",
+            "schema": {
+              "$ref": "#/definitions/pacienteFindOne200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Paciente não encontrado",
+            "schema": {
+              "$ref": "#/definitions/pacienteFindOne404"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/pacienteFindOne500"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Pacientes"
+        ],
+        "summary": "Remover um paciente por ID",
+        "description": "Endpoint para   um paciente por meio de seu ID.",
+        "parameters": [
+          {
+            "name": "pacienteId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do paciente a ser removido."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Paciente removido com sucesso",
+            "schema": {
+              "$ref": "#/definitions/pacienteRemove202"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Paciente não encontrado",
+            "schema": {
+              "$ref": "#/definitions/pacienteRemove404"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/pacienteRemove500"
+            }
+          }
+        }
+      }
+    },
+    "/prontuarios": {
+      "get": {
+        "tags": [
+          "Prontuários"
+        ],
+        "summary": "Listar pacientes",
+        "description": "Endpoint para listar pacientes.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "nome",
+            "in": "query",
+            "description": "Nome do paciente para filtrar resultados.",
+            "type": "string"
+          },
+          {
+            "name": "pacienteId",
+            "in": "query",
+            "description": "Código identificador do paciente para busca específica.",
+            "type": "integer"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "schema",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de pacientes",
+            "schema": {
+              "$ref": "#/definitions/pacientesFindAll200"
+            }
+          },
+          "400": {
+            "description": "Requisição inválida, informe nome ou pacienteId, não ambos",
+            "schema": {
+              "$ref": "#/definitions/pacientesFindAll400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/pacientesFindAll500"
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/login": {
+      "post": {
+        "tags": [
+          "Autenticação"
+        ],
+        "summary": "Login de usuário",
+        "description": "Endpoint para autenticar um usuário.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados de login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "user@example.com"
+                },
+                "senha": {
+                  "type": "string",
+                  "example": "password123"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Autenticação bem-sucedida",
+            "schema": {
+              "$ref": "#/definitions/usuarioLogin200"
+            }
+          },
+          "400": {
+            "description": "Requisição inválida, dados de login ausentes",
+            "schema": {
+              "$ref": "#/definitions/usuarioLogin400"
+            }
+          },
+          "401": {
+            "description": "Usuário e/ou senha inválidos",
+            "schema": {
+              "$ref": "#/definitions/usuarioLogin401"
+            }
+          },
+          "404": {
+            "description": "Usuário não cadastrado",
+            "schema": {
+              "$ref": "#/definitions/usuarioLogin404"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/usuarioLogin500"
+            }
+          }
+        }
+      }
+    },
+    "/usuarios": {
+      "post": {
+        "tags": [
+          "Usuários"
+        ],
+        "summary": "Criar um novo usuário",
+        "description": "Endpoint para criar um novo usuário.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados do novo usuário",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "usu_nome": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "usu_genero": {
+                  "type": "string",
+                  "example": "male"
+                },
+                "usu_cpf": {
+                  "type": "string",
+                  "example": "123.456.789-10"
+                },
+                "usu_telefone": {
+                  "type": "string",
+                  "example": "(21) 9 8888 7777"
+                },
+                "usu_email": {
+                  "type": "string",
+                  "example": "john_doe@example.com"
+                },
+                "usu_senha": {
+                  "type": "string",
+                  "example": "password123"
+                },
+                "usu_status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "per_nome": {
+                  "type": "string",
+                  "example": "admin"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Usuário criado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/usuarioCreate201"
+            }
+          },
+          "400": {
+            "description": "Requisição inválida, dados de usuário ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/usuarioCreate400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Usuário já cadastrado com o mesmo CPF ou email",
+            "schema": {
+              "$ref": "#/definitions/usuarioCreate409"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/usuarioCreate500"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Usuários"
+        ],
+        "summary": "Listar todos os usuários",
+        "description": "Endpoint para listar todos os usuários cadastrados.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de todos os usuários cadastrados",
+            "schema": {
+              "$ref": "#/definitions/usuarioFindAll200"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/usuarioFindAll500"
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/resetar-senha": {
+      "patch": {
+        "tags": [
+          "Autenticação"
+        ],
+        "summary": "Redefinir senha de usuário",
+        "description": "Endpoint para redefinir a senha de um usuário.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados para redefinir a senha",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "usu_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "usu_email": {
+                  "type": "string",
+                  "example": "user@example.com"
+                },
+                "usu_senha": {
+                  "type": "string",
+                  "example": "newpassword123"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Senha redefinida com sucesso"
+          },
+          "400": {
+            "description": "Dados ausentes ou inválidos para redefinir a senha",
+            "schema": {
+              "$ref": "#/definitions/usuarioResetSenha400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "schema": {
+              "$ref": "#/definitions/usuarioResetSenha404"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/usuarioResetSenha500"
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{usuarioId}": {
+      "put": {
+        "tags": [
+          "Usuários"
+        ],
+        "summary": "Atualizar um usuário",
+        "description": "Endpoint para atualizar um usuário por meio de seu Id.",
+        "parameters": [
+          {
+            "name": "usuarioId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "type": "integer",
+            "description": "ID do usuário.",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados de atualização do usuário",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "usu_nome": {
+                  "type": "string",
+                  "example": "Jane Doe"
+                },
+                "usu_genero": {
+                  "type": "string",
+                  "example": "female"
+                },
+                "usu_cpf": {
+                  "type": "string",
+                  "example": "987.654.321-00"
+                },
+                "usu_telefone": {
+                  "type": "string",
+                  "example": "(21) 6 5555 4444"
+                },
+                "usu_email": {
+                  "type": "string",
+                  "example": "jane_doe@example.com"
+                },
+                "usu_senha": {
+                  "type": "string",
+                  "example": "newpassword123"
+                },
+                "per_nome": {
+                  "type": "string",
+                  "example": "admin"
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário atualizado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/usuarioUpdate200"
+            }
+          },
+          "400": {
+            "description": "Requisição inválida, dados de usuário ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/usuarioUpdate400"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "schema": {
+              "$ref": "#/definitions/usuarioUpdate404"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/usuarioUpdate500"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Usuários"
+        ],
+        "summary": "Remover um usuário",
+        "description": "Endpoint para   um usuário por meio de seu Id.",
+        "parameters": [
+          {
+            "name": "usuarioId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do usuário a ser removido."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dados de confirmação para remover o usuário",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 2
+                }
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário removido com sucesso"
+          },
+          "400": {
+            "description": "Requisição inválida, dados de remoção ausentes ou inválidos",
+            "schema": {
+              "$ref": "#/definitions/usuarioRemove400"
+            }
+          },
+          "401": {
+            "description": "Operação não autorizada",
+            "schema": {
+              "$ref": "#/definitions/usuarioRemove401"
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "schema": {
+              "$ref": "#/definitions/usuarioRemove404"
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "schema": {
+              "$ref": "#/definitions/usuarioRemove500"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "userLogin200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Usuário autenticado com sucesso."
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "string",
+              "example": "JWT Token"
+            },
+            "user": {
+              "type": "string",
+              "example": "John Doe"
+            }
+          }
+        },
+        "success": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "userLogin400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Os dados são obrigatórios."
+        },
+        "data": {},
+        "success": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "userLogin401": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Usuário e/ou senha inválidos."
+        }
+      }
+    },
+    "userLogin404": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Não foi possível realizar a autenticação. Usuário não cadastrado."
+        }
+      }
+    },
+    "userLogin500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Não conseguimos processar sua solicitação."
+        }
+      }
+    },
+    "userResetSenha400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Dados ausentes ou inválidos para redefinir a senha."
+        }
+      }
+    },
+    "userResetSenha404": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Usuário não encontrado."
+        }
+      }
+    },
+    "userResetSenha500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro ao atualizar senha do usuário."
+        }
+      }
+    },
+    "userCreate201": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Usuário criado com sucesso!"
+        }
+      }
+    },
+    "userCreate400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de usuário ausentes ou inválidos."
+        }
+      }
+    },
+    "userCreate409": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Usuário já cadastrado com o mesmo CPF ou email."
+        }
+      }
+    },
+    "userCreate500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor."
+        }
+      }
+    },
+    "userUpdate200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Usuário atualizado com sucesso"
+        }
+      }
+    },
+    "userUpdate400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de usuário ausentes ou inválidos."
+        }
+      }
+    },
+    "userUpdate404": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Usuário não encontrado."
+        }
+      }
+    },
+    "userUpdate500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor."
+        }
+      }
+    },
+    "userFindAll200": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "usuarioId": {
+                "type": "number",
+                "example": 2
+              },
+              "nome": {
+                "type": "string",
+                "example": "Jane Doe"
+              },
+              "genero": {
+                "type": "string",
+                "example": "female"
+              },
+              "cpf": {
+                "type": "string",
+                "example": "987.654.321-00"
+              },
+              "telefone": {
+                "type": "string",
+                "example": "(21) 6 5555 4444"
+              },
+              "email": {
+                "type": "string",
+                "example": "jane_doe@example.com"
+              },
+              "status": {
+                "type": "boolean",
+                "example": true
+              },
+              "permissao": {
+                "type": "string",
+                "example": "admin"
+              },
+              "createdAt": {
+                "type": "string",
+                "example": "2023-10-16T23:57:25.431Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "example": "2023-10-16T23:57:25.431Z"
+              }
+            }
+          }
+        }
+      }
+    },
+    "userFindAll500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro ao listar todos os usuários"
+        }
+      }
+    },
+    "userRemove400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de remoção ausentes ou inválidos."
+        }
+      }
+    },
+    "userRemove401": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Operação não autorizada"
+        }
+      }
+    },
+    "userRemove404": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Usuário não encontrado"
+        }
+      }
+    },
+    "userRemove500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro ao remover usuário"
+        }
+      }
+    },
+    "consultaCreate201": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Consulta criada com sucesso!"
+        }
+      }
+    },
+    "consultaCreate400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro na criação da Consulta"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "consultaCreate500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Ocorreu um erro desconhecido"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "consultaFindOne200": {
+      "type": "object",
+      "properties": {
+        "consultaId": {
+          "type": "number",
+          "example": 1
+        },
+        "con_motivo": {
+          "type": "string",
+          "example": "Motivo da consulta"
+        },
+        "con_data": {
+          "type": "string",
+          "example": "2023-11-05T00:00:00.000Z"
+        },
+        "con_hora": {
+          "type": "string",
+          "example": "2023-11-05T12:00:00.000Z"
+        },
+        "con_descricao": {
+          "type": "string",
+          "example": "Descrição da consulta"
+        },
+        "con_medicacao": {
+          "type": "string",
+          "example": "Medicação prescrita"
+        },
+        "con_dosagem_precaucoes": {
+          "type": "string",
+          "example": "Dosagem e precauções"
+        },
+        "con_status": {
+          "type": "boolean",
+          "example": true
+        },
+        "pac_id": {
+          "type": "number",
+          "example": 1
+        },
+        "created_at": {
+          "type": "string",
+          "example": "2023-11-05T00:00:00.000Z"
+        },
+        "updated_at": {
+          "type": "string",
+          "example": "2023-11-05T00:00:00.000Z"
+        }
+      }
+    },
+    "consultaFindOne404": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Consulta não encontrada."
+        }
+      }
+    },
+    "consultaFindOne500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Não foi possível processar a sua solicitação"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "consultaFindAllAdmin200": {
+      "type": "object",
+      "properties": {
+        "consultas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "consultaId": {
+                "type": "number",
+                "example": 2
+              },
+              "con_motivo": {
+                "type": "string",
+                "example": "Motivo da consulta"
+              },
+              "con_data": {
+                "type": "string",
+                "example": "2023-11-05T00:00:00.000Z"
+              },
+              "con_hora": {
+                "type": "string",
+                "example": "2023-11-05T12:00:00.000Z"
+              },
+              "con_descricao": {
+                "type": "string",
+                "example": "Descrição da consulta"
+              },
+              "con_medicacao": {
+                "type": "string",
+                "example": "Medicação prescrita"
+              },
+              "con_dosagem_precaucoes": {
+                "type": "string",
+                "example": "Dosagem e precauções"
+              },
+              "con_status": {
+                "type": "boolean",
+                "example": true
+              },
+              "pac_id": {
+                "type": "number",
+                "example": 2
+              },
+              "created_at": {
+                "type": "string",
+                "example": "2023-11-05T00:00:00.000Z"
+              },
+              "updated_at": {
+                "type": "string",
+                "example": "2023-11-05T00:00:00.000Z"
+              }
+            }
+          }
+        }
+      }
+    },
+    "consultaFindAllAdmin500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro ao listar consultas."
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "consultaFindAllByPatient200": {
+      "type": "object",
+      "properties": {
+        "consultas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "consultaId": {
+                "type": "number",
+                "example": 2
+              },
+              "con_motivo": {
+                "type": "string",
+                "example": "Motivo da consulta"
+              },
+              "con_data": {
+                "type": "string",
+                "example": "2023-11-05T00:00:00.000Z"
+              },
+              "con_hora": {
+                "type": "string",
+                "example": "2023-11-05T12:00:00.000Z"
+              },
+              "con_descricao": {
+                "type": "string",
+                "example": "Descrição da consulta"
+              },
+              "con_medicacao": {
+                "type": "string",
+                "example": "Medicação prescrita"
+              },
+              "con_dosagem_precaucoes": {
+                "type": "string",
+                "example": "Dosagem e precauções"
+              },
+              "con_status": {
+                "type": "boolean",
+                "example": true
+              },
+              "pac_id": {
+                "type": "number",
+                "example": 1
+              },
+              "created_at": {
+                "type": "string",
+                "example": "2023-11-05T00:00:00.000Z"
+              },
+              "updated_at": {
+                "type": "string",
+                "example": "2023-11-05T00:00:00.000Z"
+              }
+            }
+          }
+        }
+      }
+    },
+    "consultaFindAllByPatient500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro ao listar consultas"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "consultaUpdate200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Consulta atualizada com sucesso!"
+        }
+      }
+    },
+    "consultaUpdate400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro na atualização de Consulta"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "consultaUpdate500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Ocorreu um erro desconhecido"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "consultaRemove202": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Consulta removida com sucesso."
+        }
+      }
+    },
+    "consultaRemove400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro ao remover consulta"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "consultaRemove500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Ocorreu um erro desconhecido"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "dietaCreate201": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Dieta criada com sucesso"
+        },
+        "die_nome": {
+          "type": "string",
+          "example": "Dieta de rotina"
+        },
+        "die_data": {
+          "type": "string",
+          "example": "2023-11-05"
+        },
+        "die_hora": {
+          "type": "string",
+          "example": "09:00:00"
+        },
+        "die_tipo": {
+          "type": "string",
+          "example": "Dieta balanceada"
+        },
+        "die_descricao": {
+          "type": "string",
+          "example": "Dieta para controle de peso"
+        },
+        "pac_id": {
+          "type": "number",
+          "example": 1
+        }
+      }
+    },
+    "dietaCreate400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de dieta ausentes ou inválidos"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "dietaCreate500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "dietaUpdate201": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Dieta atualizada com sucesso"
+        }
+      }
+    },
+    "dietaUpdate400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de atualização ausentes ou inválidos"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "dietaUpdate404": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Dieta não encontrada"
+        }
+      }
+    },
+    "dietaUpdate500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "dietaRemove202": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Dieta removida com sucesso"
+        }
+      }
+    },
+    "dietaRemove400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de remoção ausentes ou inválidos"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "dietaRemove500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "dietaFindAllAdmin200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Lista de todas as dietas"
+        },
+        "dietas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "die_nome": {
+                "type": "string",
+                "example": "Dieta de rotina"
+              },
+              "die_data": {
+                "type": "string",
+                "example": "2023-11-05"
+              },
+              "die_hora": {
+                "type": "string",
+                "example": "09:00:00"
+              },
+              "die_tipo": {
+                "type": "string",
+                "example": "Dieta balanceada"
+              },
+              "die_descricao": {
+                "type": "string",
+                "example": "Dieta para controle de peso"
+              },
+              "pac_id": {
+                "type": "number",
+                "example": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    "dietaFindAllAdmin500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro ao listar dietas"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "dietaFindAllByPatient200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Dietas encontradas (Nome do Paciente)"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "die_nome": {
+                "type": "string",
+                "example": "Dieta de rotina"
+              },
+              "die_data": {
+                "type": "string",
+                "example": "2023-11-05"
+              },
+              "die_hora": {
+                "type": "string",
+                "example": "09:00:00"
+              },
+              "die_tipo": {
+                "type": "string",
+                "example": "Dieta balanceada"
+              },
+              "die_descricao": {
+                "type": "string",
+                "example": "Dieta para controle de peso"
+              },
+              "pac_id": {
+                "type": "number",
+                "example": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    "dietaFindAllByPatient500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro ao listar dietas"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "examCreate201": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Exame criado com sucesso"
+        },
+        "exa_nome": {
+          "type": "string",
+          "example": "Nome do Exame"
+        },
+        "exa_tipo": {
+          "type": "string",
+          "example": "Tipo do Exame"
+        },
+        "exa_laboratorio": {
+          "type": "string",
+          "example": "Nome do Laboratório"
+        },
+        "exa_url_documento": {
+          "type": "string",
+          "example": "URL do Documento"
+        },
+        "exa_resultados": {
+          "type": "string",
+          "example": "Resultados do Exame"
+        },
+        "exa_data": {
+          "type": "string",
+          "example": "2023-11-05"
+        },
+        "exa_hora": {
+          "type": "string",
+          "example": "09:00:00"
+        },
+        "pac_id": {
+          "type": "number",
+          "example": 1
+        }
+      }
+    },
+    "examCreate400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de exame ausentes ou inválidos"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "examCreate500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "examFindOne200": {
+      "type": "object",
+      "properties": {
+        "exa_nome": {
+          "type": "string",
+          "example": "Nome do Exame"
+        },
+        "exa_tipo": {
+          "type": "string",
+          "example": "Tipo do Exame"
+        },
+        "exa_laboratorio": {
+          "type": "string",
+          "example": "Nome do Laboratório"
+        },
+        "exa_url_documento": {
+          "type": "string",
+          "example": "URL do Documento"
+        },
+        "exa_resultados": {
+          "type": "string",
+          "example": "Resultados do Exame"
+        },
+        "exa_data": {
+          "type": "string",
+          "example": "2023-11-05"
+        },
+        "exa_hora": {
+          "type": "string",
+          "example": "09:00:00"
+        },
+        "pac_id": {
+          "type": "number",
+          "example": 1
+        }
+      }
+    },
+    "examFindOne404": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Exame não encontrado"
+        }
+      }
+    },
+    "examFindOne500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "examUpdate201": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Exame atualizado com sucesso"
+        }
+      }
+    },
+    "examUpdate400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de exame ausentes ou inválidos"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "examUpdate404": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Exame não encontrado"
+        }
+      }
+    },
+    "examUpdate500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "examRemove202": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Exame removido com sucesso"
+        }
+      }
+    },
+    "examRemove400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de remoção ausentes ou inválidos"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "examRemove500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "examFindExamsByUser200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Lista de exames encontrados"
+        },
+        "exames": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "exa_nome": {
+                "type": "string",
+                "example": "Nome do Exame"
+              },
+              "exa_tipo": {
+                "type": "string",
+                "example": "Tipo do Exame"
+              },
+              "exa_laboratorio": {
+                "type": "string",
+                "example": "Nome do Laboratório"
+              },
+              "exa_url_documento": {
+                "type": "string",
+                "example": "URL do Documento"
+              },
+              "exa_resultados": {
+                "type": "string",
+                "example": "Resultados do Exame"
+              },
+              "exa_data": {
+                "type": "string",
+                "example": "2023-11-05"
+              },
+              "exa_hora": {
+                "type": "string",
+                "example": "09:00:00"
+              },
+              "pac_id": {
+                "type": "number",
+                "example": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    "examFindExamsByUser500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "examFindAllAdmin200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Lista de todos os exames cadastrados (Admin)"
+        },
+        "exames": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "exa_nome": {
+                "type": "string",
+                "example": "Nome do Exame"
+              },
+              "exa_tipo": {
+                "type": "string",
+                "example": "Tipo do Exame"
+              },
+              "exa_laboratorio": {
+                "type": "string",
+                "example": "Nome do Laboratório"
+              },
+              "exa_url_documento": {
+                "type": "string",
+                "example": "URL do Documento"
+              },
+              "exa_resultados": {
+                "type": "string",
+                "example": "Resultados do Exame"
+              },
+              "exa_data": {
+                "type": "string",
+                "example": "2023-11-05"
+              },
+              "exa_hora": {
+                "type": "string",
+                "example": "09:00:00"
+              },
+              "pac_id": {
+                "type": "number",
+                "example": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    "examFindAllAdmin500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "examFindAllByPatient200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Lista de exames do paciente"
+        },
+        "exames": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "exa_nome": {
+                "type": "string",
+                "example": "Nome do Exame"
+              },
+              "exa_tipo": {
+                "type": "string",
+                "example": "Tipo do Exame"
+              },
+              "exa_laboratorio": {
+                "type": "string",
+                "example": "Nome do Laboratório"
+              },
+              "exa_url_documento": {
+                "type": "string",
+                "example": "URL do Documento"
+              },
+              "exa_resultados": {
+                "type": "string",
+                "example": "Resultados do Exame"
+              },
+              "exa_data": {
+                "type": "string",
+                "example": "2023-11-05"
+              },
+              "exa_hora": {
+                "type": "string",
+                "example": "09:00:00"
+              },
+              "pac_id": {
+                "type": "number",
+                "example": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    "examFindAllByPatient500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "exerciseCreate201": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Exercício criado com sucesso"
+        },
+        "exe_nome": {
+          "type": "string",
+          "example": "Nome do Exercício"
+        },
+        "exe_data": {
+          "type": "string",
+          "example": "Data do Exercício"
+        },
+        "exe_hora": {
+          "type": "string",
+          "example": "Hora do Exercício"
+        },
+        "exe_tipo": {
+          "type": "string",
+          "example": "Tipo do Exercício"
+        },
+        "exe_descricao": {
+          "type": "string",
+          "example": "Descrição do Exercício"
+        },
+        "exe_qtd": {
+          "type": "number",
+          "example": 1
+        },
+        "pac_id": {
+          "type": "number",
+          "example": 1
+        }
+      }
+    },
+    "exerciseCreate400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de exercício ausentes ou inválidos"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "exerciseCreate500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "exerciseFindAllByPatient200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Exercicios encontrados (nome do paciente)"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "exe_nome": {
+                "type": "string",
+                "example": "Nome do Exercício"
+              },
+              "exe_data": {
+                "type": "string",
+                "example": "Data do Exercício"
+              },
+              "exe_hora": {
+                "type": "string",
+                "example": "Hora do Exercício"
+              },
+              "exe_tipo": {
+                "type": "string",
+                "example": "Tipo do Exercício"
+              },
+              "exe_descricao": {
+                "type": "string",
+                "example": "Descrição do Exercício"
+              },
+              "exe_qtd": {
+                "type": "number",
+                "example": 2
+              },
+              "pac_id": {
+                "type": "number",
+                "example": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    "exerciseFindAllByPatient500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "exerciseUpdate201": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Exercício atualizado com sucesso"
+        }
+      }
+    },
+    "exerciseUpdate400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de exercício ausentes ou inválidos"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "exerciseUpdate404": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Exercício não encontrado"
+        }
+      }
+    },
+    "exerciseUpdate500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "exerciseRemove202": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Exercício removido com sucesso"
+        }
+      }
+    },
+    "exerciseRemove400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de remoção ausentes ou inválidos"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "exerciseRemove500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "exerciseFindAllAdmin200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Lista de todos os exercícios cadastrados (Admin)"
+        },
+        "exercicios": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "exe_nome": {
+                "type": "string",
+                "example": "Nome do Exercício"
+              },
+              "exe_data": {
+                "type": "string",
+                "example": "Data do Exercício"
+              },
+              "exe_hora": {
+                "type": "string",
+                "example": "Hora do Exercício"
+              },
+              "exe_tipo": {
+                "type": "string",
+                "example": "Tipo do Exercício"
+              },
+              "exe_descricao": {
+                "type": "string",
+                "example": "Descrição do Exercício"
+              },
+              "exe_qtd": {
+                "type": "number",
+                "example": 2
+              },
+              "pac_id": {
+                "type": "number",
+                "example": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    "exerciseFindAllAdmin500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "logsList200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Lista de registros de logs"
+        },
+        "logs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "log_id": {
+                "type": "number",
+                "example": 2
+              },
+              "log_date": {
+                "type": "string",
+                "example": "Data do Log"
+              },
+              "log_message": {
+                "type": "string",
+                "example": "Mensagem do Log"
+              },
+              "log_type": {
+                "type": "string",
+                "example": "Tipo do Log"
+              },
+              "user_id": {
+                "type": "number",
+                "example": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    "logsList500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "medicamentoCreate201": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Medicamento criado com sucesso"
+        },
+        "medicamento": {
+          "type": "object",
+          "properties": {
+            "med_id": {
+              "type": "number",
+              "example": 1
+            },
+            "med_nome": {
+              "type": "string",
+              "example": "Medicamento X"
+            },
+            "med_data": {
+              "type": "string",
+              "example": "2023-11-10"
+            },
+            "med_hora": {
+              "type": "string",
+              "example": "08:00"
+            },
+            "med_tipo": {
+              "type": "string",
+              "example": "Comprimido"
+            },
+            "med_descricao": {
+              "type": "string",
+              "example": "Descrição do medicamento"
+            },
+            "med_qtd": {
+              "type": "number",
+              "example": 1
+            },
+            "med_unidade": {
+              "type": "string",
+              "example": "unidade"
+            },
+            "med_observacoes": {
+              "type": "string",
+              "example": "Observações do medicamento"
+            },
+            "pac_id": {
+              "type": "number",
+              "example": 1
+            },
+            "created_at": {
+              "type": "string",
+              "example": "2023-11-05T12:34:56.789Z"
+            },
+            "updated_at": {
+              "type": "string",
+              "example": "2023-11-05T12:34:56.789Z"
+            }
+          }
+        }
+      }
+    },
+    "medicamentoCreate400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de medicamento ausentes ou inválidos"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro de validação"
+        }
+      }
+    },
+    "medicamentoCreate500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "medicamentoFindOne200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Medicamento encontrado"
+        },
+        "medicamento": {
+          "type": "object",
+          "properties": {
+            "med_id": {
+              "type": "number",
+              "example": 1
+            },
+            "med_nome": {
+              "type": "string",
+              "example": "Medicamento X"
+            },
+            "med_data": {
+              "type": "string",
+              "example": "2023-11-10"
+            },
+            "med_hora": {
+              "type": "string",
+              "example": "08:00"
+            },
+            "med_tipo": {
+              "type": "string",
+              "example": "Comprimido"
+            },
+            "med_descricao": {
+              "type": "string",
+              "example": "Descrição do medicamento"
+            },
+            "med_qtd": {
+              "type": "number",
+              "example": 1
+            },
+            "med_unidade": {
+              "type": "string",
+              "example": "unidade"
+            },
+            "med_observacoes": {
+              "type": "string",
+              "example": "Observações do medicamento"
+            },
+            "pac_id": {
+              "type": "number",
+              "example": 1
+            },
+            "created_at": {
+              "type": "string",
+              "example": "2023-11-05T12:34:56.789Z"
+            },
+            "updated_at": {
+              "type": "string",
+              "example": "2023-11-05T12:34:56.789Z"
+            }
+          }
+        }
+      }
+    },
+    "medicamentoFindOne404": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Medicamento não encontrado"
+        }
+      }
+    },
+    "medicamentoFindOne500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "medicamentoUpdate200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Medicamento atualizado com sucesso"
+        }
+      }
+    },
+    "medicamentoUpdate400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de medicamento ausentes ou inválidos"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro de validação"
+        }
+      }
+    },
+    "medicamentoUpdate404": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Medicamento não encontrado"
+        }
+      }
+    },
+    "medicamentoUpdate500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "medicamentoRemove400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de remoção ausentes ou inválidos"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro de validação"
+        }
+      }
+    },
+    "medicamentoRemove500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "medicamentoFindMedicamentosByUser200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Medicamentos encontrados"
+        },
+        "medicamentos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "med_id": {
+                "type": "number",
+                "example": 2
+              },
+              "med_nome": {
+                "type": "string",
+                "example": "Medicamento Y"
+              },
+              "med_data": {
+                "type": "string",
+                "example": "2023-11-11"
+              },
+              "med_hora": {
+                "type": "string",
+                "example": "12:00"
+              },
+              "med_tipo": {
+                "type": "string",
+                "example": "Gotas"
+              },
+              "med_descricao": {
+                "type": "string",
+                "example": "Nova descrição do medicamento"
+              },
+              "med_qtd": {
+                "type": "number",
+                "example": 2
+              },
+              "med_unidade": {
+                "type": "string",
+                "example": "ml"
+              },
+              "med_observacoes": {
+                "type": "string",
+                "example": "Novas observações do medicamento"
+              },
+              "pac_id": {
+                "type": "number",
+                "example": 2
+              },
+              "created_at": {
+                "type": "string",
+                "example": "2023-11-06T12:34:56.789Z"
+              },
+              "updated_at": {
+                "type": "string",
+                "example": "2023-11-06T12:34:56.789Z"
+              }
+            }
+          }
+        }
+      }
+    },
+    "medicamentoFindMedicamentosByUser500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "medicamentoFindAllByPatient200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Lista de medicamentos do paciente"
+        },
+        "medicamentos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "med_id": {
+                "type": "number",
+                "example": 2
+              },
+              "med_nome": {
+                "type": "string",
+                "example": "Medicamento Y"
+              },
+              "med_data": {
+                "type": "string",
+                "example": "2023-11-11"
+              },
+              "med_hora": {
+                "type": "string",
+                "example": "12:00"
+              },
+              "med_tipo": {
+                "type": "string",
+                "example": "Gotas"
+              },
+              "med_descricao": {
+                "type": "string",
+                "example": "Nova descrição do medicamento"
+              },
+              "med_qtd": {
+                "type": "number",
+                "example": 2
+              },
+              "med_unidade": {
+                "type": "string",
+                "example": "ml"
+              },
+              "med_observacoes": {
+                "type": "string",
+                "example": "Novas observações do medicamento"
+              },
+              "pac_id": {
+                "type": "number",
+                "example": 2
+              },
+              "created_at": {
+                "type": "string",
+                "example": "2023-11-06T12:34:56.789Z"
+              },
+              "updated_at": {
+                "type": "string",
+                "example": "2023-11-06T12:34:56.789Z"
+              }
+            }
+          }
+        }
+      }
+    },
+    "medicamentoFindAllByPatient500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro ao listar medicamentos"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "pacienteCreate201": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Paciente criado com sucesso"
+        },
+        "paciente": {
+          "type": "object",
+          "properties": {
+            "pac_id": {
+              "type": "number",
+              "example": 1
+            },
+            "pac_nome": {
+              "type": "string",
+              "example": "João da Silva"
+            },
+            "pac_genero": {
+              "type": "string",
+              "example": "Masculino"
+            },
+            "pac_nascimento": {
+              "type": "string",
+              "example": "1990-01-01"
+            },
+            "pac_cpf": {
+              "type": "string",
+              "example": "12345678901"
+            },
+            "pac_rg": {
+              "type": "string",
+              "example": "1234567"
+            },
+            "pac_estado_civil": {
+              "type": "string",
+              "example": "Casado"
+            },
+            "pac_telefone": {
+              "type": "string",
+              "example": "1234567890"
+            },
+            "pac_email": {
+              "type": "string",
+              "example": "joao.silva@example.com"
+            },
+            "pac_naturalidade": {
+              "type": "string",
+              "example": "São Paulo"
+            },
+            "pac_contato_emergencia": {
+              "type": "string",
+              "example": "Maria da Silva"
+            },
+            "pac_alergias": {
+              "type": "string",
+              "example": "Nenhuma"
+            },
+            "pac_cuidados_especiais": {
+              "type": "string",
+              "example": "Nenhum"
+            },
+            "pac_convenio": {
+              "type": "string",
+              "example": "Unimed"
+            },
+            "pac_numero_convenio": {
+              "type": "string",
+              "example": "12345"
+            },
+            "pac_validade_convenio": {
+              "type": "string",
+              "example": "2023-12-31"
+            },
+            "end_cep": {
+              "type": "string",
+              "example": "12345-678"
+            },
+            "end_cidade": {
+              "type": "string",
+              "example": "São Paulo"
+            },
+            "end_estado": {
+              "type": "string",
+              "example": "SP"
+            },
+            "end_logradouro": {
+              "type": "string",
+              "example": "Avenida Principal"
+            },
+            "comp_numero": {
+              "type": "string",
+              "example": "123"
+            },
+            "comp_complemento": {
+              "type": "string",
+              "example": "Apartamento 4B"
+            },
+            "comp_bairro": {
+              "type": "string",
+              "example": "Centro"
+            },
+            "comp_ponto_referencia": {
+              "type": "string",
+              "example": "Próximo ao mercado"
+            },
+            "usu_id": {
+              "type": "number",
+              "example": 1
+            },
+            "created_at": {
+              "type": "string",
+              "example": "2023-11-05T12:34:56.789Z"
+            },
+            "updated_at": {
+              "type": "string",
+              "example": "2023-11-05T12:34:56.789Z"
+            }
+          }
+        }
+      }
+    },
+    "pacienteCreate400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de paciente ausentes ou inválidos"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro de validação"
+        }
+      }
+    },
+    "pacienteCreate409": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Paciente já cadastrado"
+        }
+      }
+    },
+    "pacienteCreate500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "pacienteUpdate200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Paciente atualizado com sucesso"
+        }
+      }
+    },
+    "pacienteUpdate400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, dados de paciente ausentes ou inválidos"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro de validação"
+        }
+      }
+    },
+    "pacienteUpdate404": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Paciente não encontrado"
+        }
+      }
+    },
+    "pacienteUpdate500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "pacienteFindAll200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Lista de pacientes"
+        },
+        "pacientes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pac_id": {
+                "type": "number",
+                "example": 1
+              },
+              "pac_nome": {
+                "type": "string",
+                "example": "João da Silva"
+              },
+              "pac_genero": {
+                "type": "string",
+                "example": "Masculino"
+              },
+              "pac_nascimento": {
+                "type": "string",
+                "example": "1990-01-01"
+              },
+              "pac_cpf": {
+                "type": "string",
+                "example": "12345678901"
+              },
+              "pac_rg": {
+                "type": "string",
+                "example": "1234567"
+              },
+              "pac_estado_civil": {
+                "type": "string",
+                "example": "Casado"
+              },
+              "pac_telefone": {
+                "type": "string",
+                "example": "1234567890"
+              },
+              "pac_email": {
+                "type": "string",
+                "example": "joao.silva@example.com"
+              },
+              "pac_naturalidade": {
+                "type": "string",
+                "example": "São Paulo"
+              },
+              "pac_contato_emergencia": {
+                "type": "string",
+                "example": "Maria da Silva"
+              },
+              "pac_alergias": {
+                "type": "string",
+                "example": "Nenhuma"
+              },
+              "pac_cuidados_especiais": {
+                "type": "string",
+                "example": "Nenhum"
+              },
+              "pac_convenio": {
+                "type": "string",
+                "example": "Unimed"
+              },
+              "pac_numero_convenio": {
+                "type": "string",
+                "example": "12345"
+              },
+              "pac_validade_convenio": {
+                "type": "string",
+                "example": "2023-12-31"
+              },
+              "end_cep": {
+                "type": "string",
+                "example": "12345-678"
+              },
+              "end_cidade": {
+                "type": "string",
+                "example": "São Paulo"
+              },
+              "end_estado": {
+                "type": "string",
+                "example": "SP"
+              },
+              "end_logradouro": {
+                "type": "string",
+                "example": "Avenida Principal"
+              },
+              "comp_numero": {
+                "type": "string",
+                "example": "123"
+              },
+              "comp_complemento": {
+                "type": "string",
+                "example": "Apartamento 4B"
+              },
+              "comp_bairro": {
+                "type": "string",
+                "example": "Centro"
+              },
+              "comp_ponto_referencia": {
+                "type": "string",
+                "example": "Próximo ao mercado"
+              },
+              "usu_id": {
+                "type": "number",
+                "example": 1
+              },
+              "created_at": {
+                "type": "string",
+                "example": "2023-11-05T12:34:56.789Z"
+              },
+              "updated_at": {
+                "type": "string",
+                "example": "2023-11-05T12:34:56.789Z"
+              }
+            }
+          }
+        }
+      }
+    },
+    "pacienteFindAll500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "pacienteFindOne200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Paciente encontrado"
+        },
+        "paciente": {
+          "type": "object",
+          "properties": {
+            "pac_id": {
+              "type": "number",
+              "example": 1
+            },
+            "pac_nome": {
+              "type": "string",
+              "example": "João da Silva"
+            },
+            "pac_genero": {
+              "type": "string",
+              "example": "Masculino"
+            },
+            "pac_nascimento": {
+              "type": "string",
+              "example": "1990-01-01"
+            },
+            "pac_cpf": {
+              "type": "string",
+              "example": "12345678901"
+            },
+            "pac_rg": {
+              "type": "string",
+              "example": "1234567"
+            },
+            "pac_estado_civil": {
+              "type": "string",
+              "example": "Casado"
+            },
+            "pac_telefone": {
+              "type": "string",
+              "example": "1234567890"
+            },
+            "pac_email": {
+              "type": "string",
+              "example": "joao.silva@example.com"
+            },
+            "pac_naturalidade": {
+              "type": "string",
+              "example": "São Paulo"
+            },
+            "pac_contato_emergencia": {
+              "type": "string",
+              "example": "Maria da Silva"
+            },
+            "pac_alergias": {
+              "type": "string",
+              "example": "Nenhuma"
+            },
+            "pac_cuidados_especiais": {
+              "type": "string",
+              "example": "Nenhum"
+            },
+            "pac_convenio": {
+              "type": "string",
+              "example": "Unimed"
+            },
+            "pac_numero_convenio": {
+              "type": "string",
+              "example": "12345"
+            },
+            "pac_validade_convenio": {
+              "type": "string",
+              "example": "2023-12-31"
+            },
+            "end_cep": {
+              "type": "string",
+              "example": "12345-678"
+            },
+            "end_cidade": {
+              "type": "string",
+              "example": "São Paulo"
+            },
+            "end_estado": {
+              "type": "string",
+              "example": "SP"
+            },
+            "end_logradouro": {
+              "type": "string",
+              "example": "Avenida Principal"
+            },
+            "comp_numero": {
+              "type": "string",
+              "example": "123"
+            },
+            "comp_complemento": {
+              "type": "string",
+              "example": "Apartamento 4B"
+            },
+            "comp_bairro": {
+              "type": "string",
+              "example": "Centro"
+            },
+            "comp_ponto_referencia": {
+              "type": "string",
+              "example": "Próximo ao mercado"
+            },
+            "usu_id": {
+              "type": "number",
+              "example": 1
+            },
+            "created_at": {
+              "type": "string",
+              "example": "2023-11-05T12:34:56.789Z"
+            },
+            "updated_at": {
+              "type": "string",
+              "example": "2023-11-05T12:34:56.789Z"
+            }
+          }
+        }
+      }
+    },
+    "pacienteFindOne404": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Paciente não encontrado"
+        }
+      }
+    },
+    "pacienteFindOne500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "pacienteRemove202": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Paciente removido com sucesso"
+        }
+      }
+    },
+    "pacienteRemove404": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Paciente não encontrado"
+        }
+      }
+    },
+    "pacienteRemove500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "pacientesFindAll200": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Lista de pacientes"
+        },
+        "pacientes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pac_id": {
+                "type": "number",
+                "example": 1
+              },
+              "pac_nome": {
+                "type": "string",
+                "example": "João da Silva"
+              },
+              "pac_genero": {
+                "type": "string",
+                "example": "Masculino"
+              },
+              "pac_nascimento": {
+                "type": "string",
+                "example": "1990-01-01"
+              },
+              "pac_cpf": {
+                "type": "string",
+                "example": "12345678901"
+              },
+              "pac_rg": {
+                "type": "string",
+                "example": "1234567"
+              },
+              "pac_estado_civil": {
+                "type": "string",
+                "example": "Casado"
+              },
+              "pac_telefone": {
+                "type": "string",
+                "example": "1234567890"
+              },
+              "pac_email": {
+                "type": "string",
+                "example": "joao.silva@example.com"
+              },
+              "pac_naturalidade": {
+                "type": "string",
+                "example": "São Paulo"
+              },
+              "pac_contato_emergencia": {
+                "type": "string",
+                "example": "Maria da Silva"
+              },
+              "pac_alergias": {
+                "type": "string",
+                "example": "Nenhuma"
+              },
+              "pac_cuidados_especiais": {
+                "type": "string",
+                "example": "Nenhum"
+              },
+              "pac_convenio": {
+                "type": "string",
+                "example": "Unimed"
+              },
+              "pac_numero_convenio": {
+                "type": "string",
+                "example": "12345"
+              },
+              "pac_validade_convenio": {
+                "type": "string",
+                "example": "2023-12-31"
+              },
+              "end_cep": {
+                "type": "string",
+                "example": "12345-678"
+              },
+              "end_cidade": {
+                "type": "string",
+                "example": "São Paulo"
+              },
+              "end_estado": {
+                "type": "string",
+                "example": "SP"
+              },
+              "end_logradouro": {
+                "type": "string",
+                "example": "Avenida Principal"
+              },
+              "comp_numero": {
+                "type": "string",
+                "example": "123"
+              },
+              "comp_complemento": {
+                "type": "string",
+                "example": "Apartamento 4B"
+              },
+              "comp_bairro": {
+                "type": "string",
+                "example": "Centro"
+              },
+              "comp_ponto_referencia": {
+                "type": "string",
+                "example": "Próximo ao mercado"
+              },
+              "usu_id": {
+                "type": "number",
+                "example": 1
+              },
+              "created_at": {
+                "type": "string",
+                "example": "2023-11-05T12:34:56.789Z"
+              },
+              "updated_at": {
+                "type": "string",
+                "example": "2023-11-05T12:34:56.789Z"
+              }
+            }
+          }
+        }
+      }
+    },
+    "pacientesFindAll400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Requisição inválida, informe nome ou pacienteId, não ambos"
+        }
+      }
+    },
+    "pacientesFindAll500": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Erro interno do servidor"
+        },
+        "cause": {
+          "type": "string",
+          "example": "Detalhes do erro"
+        }
+      }
+    },
+    "estatisticasFindAll200": {
+      "type": "object",
+      "properties": {
+        "totalPacientes": {
+          "type": "number",
+          "example": 100
+        },
+        "totalConsultas": {
+          "type": "number",
+          "example": 500
+        },
+        "totalExames": {
+          "type": "number",
+          "example": 200
+        }
+      }
+    }
+  }
+}
