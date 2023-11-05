@@ -29,59 +29,59 @@ const docDefinition = {
     { name: "Prontuários", description: "Endpoints de requisições de Prontuários" },
   ],
   definitions: {
-    "userLogin200": {
+    "usuarioLogin200": {
       "message": "Usuário autenticado com sucesso.",
       "data": { "token": "JWT Token", "user": "John Doe" },
       "success": true
     },
-    "userLogin400": {
+    "usuarioLogin400": {
       "message": "Os dados são obrigatórios.",
       "data": null,
       "success": false
     },
-    "userLogin401": {
+    "usuarioLogin401": {
       "message": "Usuário e/ou senha inválidos."
     },
-    "userLogin404": {
+    "usuarioLogin404": {
       "message": "Não foi possível realizar a autenticação. Usuário não cadastrado."
     },
-    "userLogin500": {
+    "usuarioLogin500": {
       "message": "Não conseguimos processar sua solicitação."
     },
-    "userResetSenha400": {
+    "usuarioResetSenha400": {
       "message": "Dados ausentes ou inválidos para redefinir a senha."
     },
-    "userResetSenha404": {
+    "usuarioResetSenha404": {
       "message": "Usuário não encontrado."
     },
-    "userResetSenha500": {
+    "usuarioResetSenha500": {
       "message": "Erro ao atualizar senha do usuário."
     },
-    "userCreate201": {
+    "usuarioCreate201": {
       "message": "Usuário criado com sucesso!"
     },
-    "userCreate400": {
+    "usuarioCreate400": {
       "message": "Requisição inválida, dados de usuário ausentes ou inválidos."
     },
-    "userCreate409": {
+    "usuarioCreate409": {
       "message": "Usuário já cadastrado com o mesmo CPF ou email."
     },
-    "userCreate500": {
+    "usuarioCreate500": {
       "message": "Erro interno do servidor."
     },
-    "userUpdate200": {
+    "usuarioUpdate200": {
       "message": "Usuário atualizado com sucesso"
     },
-    "userUpdate400": {
+    "usuarioUpdate400": {
       "message": "Requisição inválida, dados de usuário ausentes ou inválidos."
     },
-    "userUpdate404": {
+    "usuarioUpdate404": {
       "message": "Usuário não encontrado."
     },
-    "userUpdate500": {
+    "usuarioUpdate500": {
       "message": "Erro interno do servidor."
     },
-    "userFindAll200": {
+    "usuarioFindAll200": {
       "data": [
         {
           "usuarioId": 1,
@@ -109,19 +109,19 @@ const docDefinition = {
         }
       ]
     },
-    "userFindAll500": {
+    "usuarioFindAll500": {
       "message": "Erro ao listar todos os usuários"
     },
-    "userRemove400": {
+    "usuarioRemove400": {
       "message": "Requisição inválida, dados de remoção ausentes ou inválidos."
     },
-    "userRemove401": {
+    "usuarioRemove401": {
       "message": "Operação não autorizada"
     },
-    "userRemove404": {
+    "usuarioRemove404": {
       "message": "Usuário não encontrado"
     },
-    "userRemove500": {
+    "usuarioRemove500": {
       "message": "Erro ao remover usuário"
     },
 
@@ -944,11 +944,15 @@ const docDefinition = {
       "cause": "Detalhes do erro"
     },
 
-    "statisticsFindAll200": {
+    "estatisticasFindAll200": {
       "totalPacientes": 100,
       "totalConsultas": 500,
       "totalExames": 200,
-    }
+    },
+    "estatisticasFindAll500": {
+      "message": "Erro interno do servidor",
+      "cause": "Detalhes do erro"
+    },
   },
 }
 

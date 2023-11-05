@@ -14,11 +14,11 @@ class EstatisticasController {
     // #swagger.description = 'Endpoint para obter estatísticas gerais, como o total de pacientes, consultas e exames.'
     /* #swagger.responses[200] = { 
       description: 'Estatísticas gerais',
-      schema: { $ref: "#/definitions/statisticsFindAll200" }
+      schema: { $ref: "#/definitions/estatisticasFindAll200" }
     } */
     /* #swagger.responses[500] = { 
       description: 'Erro interno do servidor',
-      schema: { $ref: "#/definitions/statisticsFindAll500" }
+      schema: { $ref: "#/definitions/estatisticasFindAll500" }
     } */
 
     try {
