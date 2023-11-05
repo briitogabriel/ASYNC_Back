@@ -1,6 +1,7 @@
 require('dotenv').config();
 const jwt  = require('jsonwebtoken');
-const auth_enabled = false;
+
+const auth_enabled = true;  // MUDAR STATUS CASO QUEIRA REMOVER ATENTICAÇÃO
 
 async function auth(req, res, next) {
     try {

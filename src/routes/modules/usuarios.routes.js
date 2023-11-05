@@ -1,6 +1,6 @@
 const { Router } = require("express");
-const { login, create, resetarSenha, update, findAll, remove } = require("../controllers/usuario.controller");
-const { auth } = require("../middlewares/auth.middleware");
+const { login, create, resetarSenha, update, findAll, remove } = require("../../controllers/usuario.controller");
+const { auth } = require("../../middlewares/auth.middleware");
 
 class UsuariosRouter {
   routesFromUsuario() {
