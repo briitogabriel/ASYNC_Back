@@ -25,23 +25,23 @@ class UsuarioController {
     } */
     /* #swagger.responses[200] = { 
       description: 'Autenticação bem-sucedida',
-      schema: { $ref: "#/definitions/userLogin200" }
+      schema: { $ref: "#/definitions/usuarioLogin200" }
     } */
     /* #swagger.responses[400] = { 
       description: 'Requisição inválida, dados de login ausentes',
-      schema: { $ref: "#/definitions/userLogin400" }
+      schema: { $ref: "#/definitions/usuarioLogin400" }
     } */
     /* #swagger.responses[401] = { 
       description: 'Usuário e/ou senha inválidos',
-      schema: { $ref: "#/definitions/userLogin401" }
+      schema: { $ref: "#/definitions/usuarioLogin401" }
     } */
     /* #swagger.responses[404] = { 
       description: 'Usuário não cadastrado',
-      schema: { $ref: "#/definitions/userLogin404" }
+      schema: { $ref: "#/definitions/usuarioLogin404" }
     } */
     /* #swagger.responses[500] = { 
       description: 'Erro interno do servidor',
-      schema: { $ref: "#/definitions/userLogin500" }
+      schema: { $ref: "#/definitions/usuarioLogin500" }
     } */
 
     try {
@@ -124,15 +124,15 @@ class UsuarioController {
     } */
     /* #swagger.responses[400] = { 
       description: 'Dados ausentes ou inválidos para redefinir a senha',
-      schema: { $ref: "#/definitions/userResetSenha400" }
+      schema: { $ref: "#/definitions/usuarioResetSenha400" }
     } */
     /* #swagger.responses[404] = { 
       description: 'Usuário não encontrado',
-      schema: { $ref: "#/definitions/userResetSenha404" }
+      schema: { $ref: "#/definitions/usuarioResetSenha404" }
     } */
     /* #swagger.responses[500] = { 
       description: 'Erro interno do servidor',
-      schema: { $ref: "#/definitions/userResetSenha500" }
+      schema: { $ref: "#/definitions/usuarioResetSenha500" }
     } */
 
     try {
@@ -198,19 +198,19 @@ class UsuarioController {
     } */
     /* #swagger.responses[201] = { 
       description: 'Usuário criado com sucesso',
-      schema: { $ref: "#/definitions/userCreate201" }
+      schema: { $ref: "#/definitions/usuarioCreate201" }
     } */
     /* #swagger.responses[400] = { 
       description: 'Requisição inválida, dados de usuário ausentes ou inválidos',
-      schema: { $ref: "#/definitions/userCreate400" }
+      schema: { $ref: "#/definitions/usuarioCreate400" }
     } */
     /* #swagger.responses[409] = { 
       description: 'Usuário já cadastrado com o mesmo CPF ou email',
-      schema: { $ref: "#/definitions/userCreate409" }
+      schema: { $ref: "#/definitions/usuarioCreate409" }
     } */
     /* #swagger.responses[500] = { 
       description: 'Erro interno do servidor',
-      schema: { $ref: "#/definitions/userCreate500" }
+      schema: { $ref: "#/definitions/usuarioCreate500" }
     } */
 
     try {
@@ -298,19 +298,19 @@ class UsuarioController {
     } */
     /* #swagger.responses[200] = { 
       description: 'Usuário atualizado com sucesso',
-      schema: { $ref: "#/definitions/userUpdate200" }
+      schema: { $ref: "#/definitions/usuarioUpdate200" }
     } */
     /* #swagger.responses[400] = { 
       description: 'Requisição inválida, dados de usuário ausentes ou inválidos',
-      schema: { $ref: "#/definitions/userUpdate400" }
+      schema: { $ref: "#/definitions/usuarioUpdate400" }
     } */
     /* #swagger.responses[404] = { 
       description: 'Usuário não encontrado',
-      schema: { $ref: "#/definitions/userUpdate404" }
+      schema: { $ref: "#/definitions/usuarioUpdate404" }
     } */
     /* #swagger.responses[500] = { 
       description: 'Erro interno do servidor',
-      schema: { $ref: "#/definitions/userUpdate500" }
+      schema: { $ref: "#/definitions/usuarioUpdate500" }
     } */
 
     try {
@@ -381,11 +381,11 @@ class UsuarioController {
     // #swagger.description = 'Endpoint para listar todos os usuários cadastrados.'
     /* #swagger.responses[200] = { 
       description: 'Lista de todos os usuários cadastrados',
-      schema: { $ref: "#/definitions/userFindAll200" }
+      schema: { $ref: "#/definitions/usuarioFindAll200" }
     } */
     /* #swagger.responses[500] = { 
       description: 'Erro interno do servidor',
-      schema: { $ref: "#/definitions/userFindAll500" }
+      schema: { $ref: "#/definitions/usuarioFindAll500" }
     } */
 
     try {
@@ -435,19 +435,19 @@ class UsuarioController {
     } */
     /* #swagger.responses[400] = { 
       description: 'Requisição inválida, dados de remoção ausentes ou inválidos',
-      schema: { $ref: "#/definitions/userRemove400" }
+      schema: { $ref: "#/definitions/usuarioRemove400" }
     } */
     /* #swagger.responses[401] = { 
       description: 'Operação não autorizada',
-      schema: { $ref: "#/definitions/userRemove401" }
+      schema: { $ref: "#/definitions/usuarioRemove401" }
     } */
     /* #swagger.responses[404] = { 
       description: 'Usuário não encontrado',
-      schema: { $ref: "#/definitions/userRemove404" }
+      schema: { $ref: "#/definitions/usuarioRemove404" }
     } */
     /* #swagger.responses[500] = { 
       description: 'Erro interno do servidor',
-      schema: { $ref: "#/definitions/userRemove500" }
+      schema: { $ref: "#/definitions/usuarioRemove500" }
     } */
 
     try {
