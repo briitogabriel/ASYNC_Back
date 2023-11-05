@@ -123,6 +123,128 @@ const docDefinition = {
     },
     "userRemove500": {
       "message": "Erro ao remover usuário"
+    },
+    
+    "consultaCreate201": {
+      "message": "Consulta criada com sucesso!"
+    },
+    "consultaCreate400": {
+      "message": "Erro na criação da Consulta",
+      "cause": "Detalhes do erro"
+    },
+    "consultaCreate500": {
+      "message": "Ocorreu um erro desconhecido",
+      "cause": "Detalhes do erro"
+    },
+    "consultaFindOne200": {
+      "consultaId": 1,
+      "con_motivo": "Motivo da consulta",
+      "con_data": "2023-11-05T00:00:00.000Z",
+      "con_hora": "2023-11-05T12:00:00.000Z",
+      "con_descricao": "Descrição da consulta",
+      "con_medicacao": "Medicação prescrita",
+      "con_dosagem_precaucoes": "Dosagem e precauções",
+      "con_status": true,
+      "pac_id": 1,
+      "created_at": "2023-11-05T00:00:00.000Z",
+      "updated_at": "2023-11-05T00:00:00.000Z"
+    },
+    "consultaFindOne404": {
+      "message": "Consulta não encontrada."
+    },
+    "consultaFindOne500": {
+      "message": "Não foi possível processar a sua solicitação",
+      "cause": "Detalhes do erro"
+    },
+    "consultaFindAllAdmin200": {
+      "consultas": [
+        {
+          "consultaId": 1,
+          "con_motivo": "Motivo da consulta",
+          "con_data": "2023-11-05T00:00:00.000Z",
+          "con_hora": "2023-11-05T12:00:00.000Z",
+          "con_descricao": "Descrição da consulta",
+          "con_medicacao": "Medicação prescrita",
+          "con_dosagem_precaucoes": "Dosagem e precauções",
+          "con_status": true,
+          "pac_id": 1,
+          "created_at": "2023-11-05T00:00:00.000Z",
+          "updated_at": "2023-11-05T00:00:00.000Z"
+        },
+        {
+          "consultaId": 2,
+          "con_motivo": "Motivo da consulta",
+          "con_data": "2023-11-05T00:00:00.000Z",
+          "con_hora": "2023-11-05T12:00:00.000Z",
+          "con_descricao": "Descrição da consulta",
+          "con_medicacao": "Medicação prescrita",
+          "con_dosagem_precaucoes": "Dosagem e precauções",
+          "con_status": true,
+          "pac_id": 2,
+          "created_at": "2023-11-05T00:00:00.000Z",
+          "updated_at": "2023-11-05T00:00:00.000Z"
+        }
+      ]
+    },
+    "consultaFindAllAdmin500": {
+      "message": "Erro ao listar consultas.",
+      "cause": "Detalhes do erro"
+    },
+    "consultaFindAllByPatient200": {
+      "consultas": [
+        {
+          "consultaId": 1,
+          "con_motivo": "Motivo da consulta",
+          "con_data": "2023-11-05T00:00:00.000Z",
+          "con_hora": "2023-11-05T12:00:00.000Z",
+          "con_descricao": "Descrição da consulta",
+          "con_medicacao": "Medicação prescrita",
+          "con_dosagem_precaucoes": "Dosagem e precauções",
+          "con_status": true,
+          "pac_id": 1,
+          "created_at": "2023-11-05T00:00:00.000Z",
+          "updated_at": "2023-11-05T00:00:00.000Z"
+        },
+        {
+          "consultaId": 2,
+          "con_motivo": "Motivo da consulta",
+          "con_data": "2023-11-05T00:00:00.000Z",
+          "con_hora": "2023-11-05T12:00:00.000Z",
+          "con_descricao": "Descrição da consulta",
+          "con_medicacao": "Medicação prescrita",
+          "con_dosagem_precaucoes": "Dosagem e precauções",
+          "con_status": true,
+          "pac_id": 1,
+          "created_at": "2023-11-05T00:00:00.000Z",
+          "updated_at": "2023-11-05T00:00:00.000Z"
+        }
+      ]
+    },
+    "consultaFindAllByPatient500": {
+      "message": "Erro ao listar consultas",
+      "cause": "Detalhes do erro"
+    },
+    "consultaUpdate200": {
+      "message": "Consulta atualizada com sucesso!"
+    },
+    "consultaUpdate400": {
+      "message": "Erro na atualização de Consulta",
+      "cause": "Detalhes do erro"
+    },
+    "consultaUpdate500": {
+      "message": "Ocorreu um erro desconhecido",
+      "cause": "Detalhes do erro"
+    },
+    "consultaRemove202": {
+      "message": "Consulta removida com sucesso."
+    },
+    "consultaRemove400": {
+      "message": "Erro ao remover consulta",
+      "cause": "Detalhes do erro"
+    },
+    "consultaRemove500": {
+      "message": "Ocorreu um erro desconhecido",
+      "cause": "Detalhes do erro"
     }
   },
 }
