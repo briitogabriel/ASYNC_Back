@@ -36,3 +36,9 @@ O objetivo principal é oferecer uma plataforma que simplifique processos de ate
 ## Uso
 
 Após a instalação e configuração, a api estará disponível na URL: http://localhost:3333
+
+## Melhorias a serem aplicadas
+- Deveríamos implementar a inclusão da Foto do paciente para agilizar atendimentos emergenciais em que o paciente não estivesse responsivo;
+- Juntamente com a foto, implementar uma busca por reconhecimento facial onde pudesse ser usado um scanner pra buscar no sistema o paciente a ser atendido;
+- Feedback de atendimento para médicos, onde os pacientes pudessem registrar elogios/reclamações de seus respectivos atendimentos e assim deixar o registro para futuros pacientes.
+- Feedback de atendimento para pacientes, onde os médicos pudessem relatar uma breve descrição do atendimento, se o paciente foi receptivo ao tratamento, se foi dificil indicar tratamento pelo comportamento do paciente e assim ser possível que o próximo médico a atende-la esteja pronto e preparado para as dificuldades que possam vir a acontecer.
