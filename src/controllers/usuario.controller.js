@@ -9,6 +9,41 @@ const Permissoes = require("../models/permissoes")(sequelize, Sequelize);
 
 class UsuarioController {
   async login(req, res) {
+
+    // #swagger.tags = ['Autenticação']
+    // #swagger.summary = 'Login de usuário'
+    // #swagger.description = 'Endpoint para autenticar um usuário.'
+    /* #swagger.parameters["body"] = { 
+      in: "body",
+      description: "Dados de login",
+      type: "object",
+      schema: {
+        email: "user@example.com",
+        senha: "password123"
+      },
+      required: true
+    } */
+    /* #swagger.responses[200] = { 
+      description: 'Autenticação bem-sucedida',
+      schema: { $ref: "#/definitions/userLogin200" }
+    } */
+    /* #swagger.responses[400] = { 
+      description: 'Requisição inválida, dados de login ausentes',
+      schema: { $ref: "#/definitions/userLogin400" }
+    } */
+    /* #swagger.responses[401] = { 
+      description: 'Usuário e/ou senha inválidos',
+      schema: { $ref: "#/definitions/userLogin401" }
+    } */
+    /* #swagger.responses[404] = { 
+      description: 'Usuário não cadastrado',
+      schema: { $ref: "#/definitions/userLogin404" }
+    } */
+    /* #swagger.responses[500] = { 
+      description: 'Erro interno do servidor',
+      schema: { $ref: "#/definitions/userLogin500" }
+    } */
+
     try {
       const { email, senha } = req.body;
 
@@ -69,6 +104,37 @@ class UsuarioController {
   }
 
   async resetarSenha(req, res) {
+    
+    // #swagger.tags = ['Autenticação']
+    // #swagger.summary = 'Redefinir senha de usuário'
+    // #swagger.description = 'Endpoint para redefinir a senha de um usuário.'
+    /* #swagger.parameters["body"] = { 
+      in: "body",
+      description: "Dados para redefinir a senha",
+      type: "object",
+      schema: {
+        usu_id: 1,
+        usu_email: "user@example.com",
+        usu_senha: "newpassword123"
+      },
+      required: true
+    } */
+    /* #swagger.responses[200] = { 
+      description: 'Senha redefinida com sucesso'
+    } */
+    /* #swagger.responses[400] = { 
+      description: 'Dados ausentes ou inválidos para redefinir a senha',
+      schema: { $ref: "#/definitions/userResetSenha400" }
+    } */
+    /* #swagger.responses[404] = { 
+      description: 'Usuário não encontrado',
+      schema: { $ref: "#/definitions/userResetSenha404" }
+    } */
+    /* #swagger.responses[500] = { 
+      description: 'Erro interno do servidor',
+      schema: { $ref: "#/definitions/userResetSenha500" }
+    } */
+
     try {
       const { usu_id, usu_email, usu_senha } = req.body;
 
@@ -110,6 +176,43 @@ class UsuarioController {
   }
 
   async create(req, res) {
+
+    // #swagger.tags = ['Usuários]
+    // #swagger.summary = 'Criar um novo usuário'
+    // #swagger.description = 'Endpoint para criar um novo usuário.'
+    /* #swagger.parameters["body"] = { 
+      in: "body",
+      description: "Dados do novo usuário",
+      type: "object",
+      schema: {
+        usu_nome: "John Doe",
+        usu_genero: "male",
+        usu_cpf: "123.456.789-10",
+        usu_telefone: "(21) 9 8888 7777",
+        usu_email: "john_doe@example.com",
+        usu_senha: "password123",
+        usu_status: true,
+        per_nome: "admin"
+      },
+      required: true
+    } */
+    /* #swagger.responses[201] = { 
+      description: 'Usuário criado com sucesso',
+      schema: { $ref: "#/definitions/userCreate201" }
+    } */
+    /* #swagger.responses[400] = { 
+      description: 'Requisição inválida, dados de usuário ausentes ou inválidos',
+      schema: { $ref: "#/definitions/userCreate400" }
+    } */
+    /* #swagger.responses[409] = { 
+      description: 'Usuário já cadastrado com o mesmo CPF ou email',
+      schema: { $ref: "#/definitions/userCreate409" }
+    } */
+    /* #swagger.responses[500] = { 
+      description: 'Erro interno do servidor',
+      schema: { $ref: "#/definitions/userCreate500" }
+    } */
+
     try {
       const {
         usu_nome,
@@ -173,6 +276,43 @@ class UsuarioController {
   }
 
   async update(req, res) {
+
+    // #swagger.tags = ['Usuários]
+    // #swagger.summary = 'Atualizar um usuário'
+    // #swagger.description = 'Endpoint para atualizar um usuário por meio de seu Id.'
+    /* #swagger.parameters['id'] = {in: 'path', type: 'integer', description: 'ID do usuário.'} */
+    /* #swagger.parameters["body"] = { 
+      in: "body",
+      description: "Dados de atualização do usuário",
+      type: "object",
+      schema: {
+        usu_nome: "Jane Doe",
+        usu_genero: "female",
+        usu_cpf: "987.654.321-00",
+        usu_telefone: "(21) 6 5555 4444",
+        usu_email: "jane_doe@example.com",
+        usu_senha: "newpassword123",
+        per_nome: "admin"
+      },
+      required: true
+    } */
+    /* #swagger.responses[200] = { 
+      description: 'Usuário atualizado com sucesso',
+      schema: { $ref: "#/definitions/userUpdate200" }
+    } */
+    /* #swagger.responses[400] = { 
+      description: 'Requisição inválida, dados de usuário ausentes ou inválidos',
+      schema: { $ref: "#/definitions/userUpdate400" }
+    } */
+    /* #swagger.responses[404] = { 
+      description: 'Usuário não encontrado',
+      schema: { $ref: "#/definitions/userUpdate404" }
+    } */
+    /* #swagger.responses[500] = { 
+      description: 'Erro interno do servidor',
+      schema: { $ref: "#/definitions/userUpdate500" }
+    } */
+
     try {
       const {
         usu_nome,
@@ -228,6 +368,19 @@ class UsuarioController {
   }
 
   async findAll(req, res) {
+
+    // #swagger.tags = ['Usuários]
+    // #swagger.summary = 'Listar todos os usuários'
+    // #swagger.description = 'Endpoint para listar todos os usuários cadastrados.'
+    /* #swagger.responses[200] = { 
+      description: 'Lista de todos os usuários cadastrados',
+      schema: { $ref: "#/definitions/userFindAll200" }
+    } */
+    /* #swagger.responses[500] = { 
+      description: 'Erro interno do servidor',
+      schema: { $ref: "#/definitions/userFindAll500" }
+    } */
+
     try {
       const usuarios = await Usuarios.findAll();
 
@@ -256,6 +409,40 @@ class UsuarioController {
   }
 
   async remove(req, res) {
+
+    // #swagger.tags = ['Usuários]
+    // #swagger.summary = 'Remover um usuário'
+    // #swagger.description = 'Endpoint para remover um usuário por meio de seu Id.'
+    /* #swagger.parameters['usuarioId'] = {in: 'path', type: 'integer', description: 'ID do usuário a ser removido.'} */
+    /* #swagger.parameters["body"] = { 
+      in: "body",
+      description: "Dados de confirmação para remover o usuário",
+      type: "object",
+      schema: {
+        id: 2
+      },
+      required: true
+    } */
+    /* #swagger.responses[200] = { 
+      description: 'Usuário removido com sucesso'
+    } */
+    /* #swagger.responses[400] = { 
+      description: 'Requisição inválida, dados de remoção ausentes ou inválidos',
+      schema: { $ref: "#/definitions/userRemove400" }
+    } */
+    /* #swagger.responses[401] = { 
+      description: 'Operação não autorizada',
+      schema: { $ref: "#/definitions/userRemove401" }
+    } */
+    /* #swagger.responses[404] = { 
+      description: 'Usuário não encontrado',
+      schema: { $ref: "#/definitions/userRemove404" }
+    } */
+    /* #swagger.responses[500] = { 
+      description: 'Erro interno do servidor',
+      schema: { $ref: "#/definitions/userRemove500" }
+    } */
+
     try {
       const { usuarioId } = req.params;
       const { id } = req.body;
