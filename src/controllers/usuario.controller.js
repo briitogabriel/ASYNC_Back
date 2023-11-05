@@ -177,7 +177,7 @@ class UsuarioController {
 
   async create(req, res) {
 
-    // #swagger.tags = ['Usuários]
+    // #swagger.tags = ['Usuários']
     // #swagger.summary = 'Criar um novo usuário'
     // #swagger.description = 'Endpoint para criar um novo usuário.'
     /* #swagger.parameters["body"] = { 
@@ -277,7 +277,7 @@ class UsuarioController {
 
   async update(req, res) {
 
-    // #swagger.tags = ['Usuários]
+    // #swagger.tags = ['Usuários']
     // #swagger.summary = 'Atualizar um usuário'
     // #swagger.description = 'Endpoint para atualizar um usuário por meio de seu Id.'
     /* #swagger.parameters['id'] = {in: 'path', type: 'integer', description: 'ID do usuário.'} */
@@ -376,7 +376,7 @@ class UsuarioController {
 
   async findAll(req, res) {
 
-    // #swagger.tags = ['Usuários]
+    // #swagger.tags = ['Usuários']
     // #swagger.summary = 'Listar todos os usuários'
     // #swagger.description = 'Endpoint para listar todos os usuários cadastrados.'
     /* #swagger.responses[200] = { 
@@ -417,7 +417,7 @@ class UsuarioController {
 
   async remove(req, res) {
 
-    // #swagger.tags = ['Usuários]
+    // #swagger.tags = ['Usuários']
     // #swagger.summary = 'Remover um usuário'
     // #swagger.description = 'Endpoint para remover um usuário por meio de seu Id.'
     /* #swagger.parameters['usuarioId'] = {in: 'path', type: 'integer', description: 'ID do usuário a ser removido.'} */
