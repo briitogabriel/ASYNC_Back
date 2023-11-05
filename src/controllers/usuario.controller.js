@@ -57,7 +57,7 @@ class UsuarioController {
 
       return res.status(200).send({
         message: `Usuário ${usuario.usu_nome} autenticado com sucesso.`,
-        data: isPasswordValid ? token : null,
+        data: isPasswordValid ? { token: token, user: usuario } : null,
         success: isPasswordValid,
       });
     } catch (error) {
@@ -76,7 +76,7 @@ class UsuarioController {
 
       if (!usuario) {
         return res.status(404).send({ message: "Usuário não encontrado." });
-      };
+      }
 
       const emailInDb = await Usuarios.findOne({
         where: { usu_email: usu_email },
@@ -84,17 +84,17 @@ class UsuarioController {
 
       if (!emailInDb) {
         return res.status(400).send({ message: "Email não cadastrado." });
-      };
+      }
 
       if (!usu_senha) {
         return res.status(400).send({ message: "Informe uma senha válida." });
-      };
+      }
 
       if (usu_senha === usuario.usu_senha) {
         return res
           .status(400)
           .send({ message: "A senha já está sendo utilizada." });
-      };
+      }
 
       usuario.usu_senha = usu_senha;
 
@@ -132,7 +132,7 @@ class UsuarioController {
         usu_status,
       });
 
-      const permissao = await Permissoes.findOne({where: {per_nome}});
+      const permissao = await Permissoes.findOne({ where: { per_nome } });
 
       const cpfInDb = await Usuarios.findOne({
         where: { usu_cpf: usu_cpf },
@@ -205,14 +205,21 @@ class UsuarioController {
         return res.status(400).send({ message: "Senha incorreta." });
       }
 
-      const permissao = await Permissoes.findOne({where: {per_nome}});
+      const permissao = await Permissoes.findOne({ where: { per_nome } });
 
       usuario.usu_nome = usu_nome;
       usuario.usu_genero = usu_genero;
       usuario.usu_telefone = usu_telefone;
       usuario.usu_email = usu_email;
       usuario.per_id = permissao.per_id;
-      usuario.usu_campo_busca = usu_nome + " | " + usuario.usu_cpf + " | " + usu_telefone + " | " + usu_email;
+      usuario.usu_campo_busca =
+        usu_nome +
+        " | " +
+        usuario.usu_cpf +
+        " | " +
+        usu_telefone +
+        " | " +
+        usu_email;
 
       await usuario.save();
 
