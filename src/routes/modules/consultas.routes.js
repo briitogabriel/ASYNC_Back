@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const { create, update, findAllAdmin, findOne, findAllByPatient, remove } = require('../controllers/consultas.controller');
-const { auth } = require('../middlewares/auth.middleware');
+const { create, update, findAllAdmin, findOne, findAllByPatient, remove } = require('../../controllers/consultas.controller');
+const { auth } = require('../../middlewares/auth.middleware');
 
 class ConsultasRouter{
   routesFromConsultas(){

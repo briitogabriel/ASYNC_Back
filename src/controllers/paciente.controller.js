@@ -8,6 +8,59 @@ const Pacientes = require("../models/pacientes")(sequelize, Sequelize);
 
 class PacienteController {
   async create(req, res) {
+
+    // #swagger.tags = ['Pacientes']
+    // #swagger.summary = 'Criar um novo paciente'
+    // #swagger.description = 'Endpoint para criar um novo paciente.'
+    /* #swagger.parameters["body"] = { 
+      in: "body",
+      description: "Dados do novo paciente",
+      type: "object",
+      schema: {
+        pac_nome: "João da Silva",
+        pac_genero: "Masculino",
+        pac_nascimento: "1990-01-01",
+        pac_cpf: "12345678901",
+        pac_rg: "1234567",
+        pac_estado_civil: "Casado",
+        pac_telefone: "1234567890",
+        pac_email: "joao.silva@example.com",
+        pac_naturalidade: "São Paulo",
+        pac_contato_emergencia: "Maria da Silva",
+        pac_alergias: "Nenhuma",
+        pac_cuidados_especiais: "Nenhum",
+        pac_convenio: "Unimed",
+        pac_numero_convenio: "12345",
+        pac_validade_convenio: "2023-12-31",
+        end_cep: "12345-678",
+        end_cidade: "São Paulo",
+        end_estado: "SP",
+        end_logradouro: "Avenida Principal",
+        comp_numero: "123",
+        comp_complemento: "Apartamento 4B",
+        comp_bairro: "Centro",
+        comp_ponto_referencia: "Próximo ao mercado",
+        usu_id: 1
+      },
+      required: true
+    } */
+    /* #swagger.responses[201] = { 
+      description: 'Paciente criado com sucesso',
+      schema: { $ref: "#/definitions/pacienteCreate201" }
+    } */
+    /* #swagger.responses[400] = { 
+      description: 'Requisição inválida, dados de paciente ausentes ou inválidos',
+      schema: { $ref: "#/definitions/pacienteCreate400" }
+    } */
+    /* #swagger.responses[409] = { 
+      description: 'Paciente já cadastrado',
+      schema: { $ref: "#/definitions/pacienteCreate409" }
+    } */
+    /* #swagger.responses[500] = { 
+      description: 'Erro interno do servidor',
+      schema: { $ref: "#/definitions/pacienteCreate500" }
+    } */
+
     try {
       const {
         pac_nome,
@@ -141,6 +194,56 @@ class PacienteController {
   }
 
   async update(req, res) {
+
+    // #swagger.tags = ['Pacientes']
+    // #swagger.summary = 'Atualizar um paciente'
+    // #swagger.description = 'Endpoint para atualizar um paciente por meio de seu ID.'
+    /* #swagger.parameters['pacienteId'] = {in: 'path', type: 'integer', description: 'ID do paciente a ser atualizado.'} */
+    /* #swagger.parameters["body"] = { 
+      in: "body",
+      description: "Dados de atualização do paciente",
+      type: "object",
+      schema: {
+        pac_nome: "João da Silva",
+        pac_genero: "Masculino",
+        pac_nascimento: "1990-01-01",
+        pac_cpf: "12345678901",
+        pac_rg: "1234567",
+        pac_estado_civil: "Casado",
+        pac_telefone: "1234567890",
+        pac_email: "joao.silva@example.com",
+        pac_naturalidade: "São Paulo",
+        pac_contato_emergencia: "Maria da Silva",
+        pac_alergias: "Nenhuma",
+        pac_cuidados_especiais: "Nenhum",
+        pac_convenio: "Unimed",
+        pac_numero_convenio: "12345",
+        pac_validade_convenio: "2023-12-31",
+        pac_status: true,
+        end_cep: "12345-678",
+        end_cidade: "São Paulo",
+        end_estado: "SP",
+        end_logradouro: "Avenida Principal",
+        comp_numero: "123",
+        comp_complemento: "Apartamento 4B",
+        comp_bairro: "Centro",
+        comp_ponto_referencia: "Próximo ao mercado",
+      },
+      required: true
+    } */
+    /* #swagger.responses[200] = { 
+      description: 'Paciente atualizado com sucesso',
+      schema: { $ref: "#/definitions/pacienteUpdate200" }
+    } */
+    /* #swagger.responses[400] = { 
+      description: 'Requisição inválida, dados de paciente ausentes ou inválidos',
+      schema: { $ref: "#/definitions/pacienteUpdate400" }
+    } */
+    /* #swagger.responses[500] = { 
+      description: 'Erro interno do servidor',
+      schema: { $ref: "#/definitions/pacienteUpdate500" }
+    } */
+
     try {
       const { pacienteId } = req.params;
 
@@ -251,6 +354,19 @@ class PacienteController {
   }
 
   async findAll(req, res) {
+
+    // #swagger.tags = ['Pacientes']
+    // #swagger.summary = 'Listar todos os pacientes'
+    // #swagger.description = 'Endpoint para listar todos os pacientes cadastrados.'
+    /* #swagger.responses[200] = { 
+      description: 'Lista de pacientes',
+      schema: { $ref: "#/definitions/pacienteFindAll200" }
+    } */
+    /* #swagger.responses[500] = { 
+      description: 'Erro interno do servidor',
+      schema: { $ref: "#/definitions/pacienteFindAll500" }
+    } */
+
     try {
       const pacientes = await Pacientes.findAll();
 
@@ -264,6 +380,24 @@ class PacienteController {
   }
 
   async findOne(req, res) {
+
+    // #swagger.tags = ['Pacientes']
+    // #swagger.summary = 'Buscar um paciente por ID'
+    // #swagger.description = 'Endpoint para buscar um paciente por meio de seu ID.'
+    /* #swagger.parameters['pacienteId'] = {in: 'path', type: 'integer', description: 'ID do paciente a ser buscado.'} */
+    /* #swagger.responses[200] = { 
+      description: 'Paciente encontrado',
+      schema: { $ref: "#/definitions/pacienteFindOne200" }
+    } */
+    /* #swagger.responses[404] = { 
+      description: 'Paciente não encontrado',
+      schema: { $ref: "#/definitions/pacienteFindOne404" }
+    } */
+    /* #swagger.responses[500] = { 
+      description: 'Erro interno do servidor',
+      schema: { $ref: "#/definitions/pacienteFindOne500" }
+    } */
+
     try {
       const { pacienteId } = req.params;
 
@@ -283,6 +417,24 @@ class PacienteController {
   }
 
   async remove(req, res) {
+
+    // #swagger.tags = ['Pacientes']
+    // #swagger.summary = 'Remover um paciente por ID'
+    // #swagger.description = 'Endpoint para remover um paciente por meio de seu ID.'
+    /* #swagger.parameters['pacienteId'] = {in: 'path', type: 'integer', description: 'ID do paciente a ser removido.'} */
+    /* #swagger.responses[202] = { 
+      description: 'Paciente removido com sucesso',
+      schema: { $ref: "#/definitions/pacienteRemove202" }
+    } */
+    /* #swagger.responses[404] = { 
+      description: 'Paciente não encontrado',
+      schema: { $ref: "#/definitions/pacienteRemove404" }
+    } */
+    /* #swagger.responses[500] = { 
+      description: 'Erro interno do servidor',
+      schema: { $ref: "#/definitions/pacienteRemove500" }
+    } */
+
     try {
       const { pacienteId } = req.params;
 

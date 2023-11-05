@@ -8,6 +8,19 @@ const { Exames } = require('../models/exames');
 
 class EstatisticasController {
   async findAll(req, res) {
+
+    // #swagger.tags = ['Estatísticas']
+    // #swagger.summary = 'Obter estatísticas gerais'
+    // #swagger.description = 'Endpoint para obter estatísticas gerais, como o total de pacientes, consultas e exames.'
+    /* #swagger.responses[200] = { 
+      description: 'Estatísticas gerais',
+      schema: { $ref: "#/definitions/statisticsFindAll200" }
+    } */
+    /* #swagger.responses[500] = { 
+      description: 'Erro interno do servidor',
+      schema: { $ref: "#/definitions/statisticsFindAll500" }
+    } */
+
     try {
 
       const pacientesCount = await Pacientes.count();
