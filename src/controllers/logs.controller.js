@@ -6,6 +6,19 @@ const { Logs } = require('../models/logs')(sequelize, Sequelize);
 
 class LogsController {
   async listarLogs(req, res) {
+
+    // #swagger.tags = ['Logs']
+    // #swagger.summary = 'Listar registros de logs'
+    // #swagger.description = 'Endpoint para listar os registros de logs.'
+    /* #swagger.responses[200] = { 
+      description: 'Lista de registros de logs',
+      schema: { $ref: "#/definitions/logsList200" }
+    } */
+    /* #swagger.responses[500] = { 
+      description: 'Erro interno do servidor',
+      schema: { $ref: "#/definitions/logsList500" }
+    } */
+
     try {
       const logs = await Logs.findAll();
 
