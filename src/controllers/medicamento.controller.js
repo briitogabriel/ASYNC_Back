@@ -294,15 +294,15 @@ class MedicamentosController {
         } */
 
         try {
-            const { userName } = req.query;
+            const { pacienteId } = req.params;
     
-            if (!userName) {
+            if (!pacienteId) {
                 const medicamentos = await Medicamentos.findAll();
                 return res.status(200).send(medicamentos);
             } else {
                 const medicamentos = await Medicamentos.findAll({
                     where: {
-                        usu_nome: userName,
+                        pac_id: pacienteId,
                     },
                 });
     
