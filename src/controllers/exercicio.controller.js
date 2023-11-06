@@ -7,6 +7,38 @@ const Exercicios = require("../models/exercicios")(sequelize, Sequelize);
 const Pacientes = require("../models/pacientes")(sequelize, Sequelize);
 class ExercicioController {
     async create(req, res) {
+
+        // #swagger.tags = ['Exercícios']
+        // #swagger.summary = 'Criar um novo exercício'
+        // #swagger.description = 'Endpoint para criar um novo exercício.'
+        /* #swagger.parameters["body"] = { 
+            in: "body",
+            description: "Dados do novo exercício",
+            type: "object",
+            schema: {
+            exe_nome: "Nome do Exercício",
+            exe_data: "Data do Exercício",
+            exe_hora: "Hora do Exercício",
+            exe_tipo: "Tipo do Exercício",
+            exe_descricao: "Descrição do Exercício",
+            exe_qtd: 1,
+            pac_id: 1
+            },
+            required: true
+        } */
+        /* #swagger.responses[201] = { 
+            description: 'Exercício criado com sucesso',
+            schema: { $ref: "#/definitions/exerciseCreate201" }
+        } */
+        /* #swagger.responses[400] = { 
+            description: 'Requisição inválida, dados de exercício ausentes ou inválidos',
+            schema: { $ref: "#/definitions/exerciseCreate400" }
+        } */
+        /* #swagger.responses[500] = { 
+            description: 'Erro interno do servidor',
+            schema: { $ref: "#/definitions/exerciseCreate500" }
+        } */
+
         try {
             const {
                 exe_nome,
@@ -59,8 +91,22 @@ class ExercicioController {
     }
 
     async findAllByPatient(req, res) {
+
+        // #swagger.tags = ['Exercícios']
+        // #swagger.summary = 'Listar exercícios de um paciente'
+        // #swagger.description = 'Endpoint para listar exercícios de um paciente com base no nome do paciente.'
+        /* #swagger.parameters['pac_nome'] = {in: 'path', type: 'string', description: 'Nome do paciente para pesquisa.'} */
+        /* #swagger.responses[200] = { 
+            description: 'Lista de exercícios do paciente',
+            schema: { $ref: "#/definitions/exerciseFindAllByPatient200" }
+        } */
+        /* #swagger.responses[500] = { 
+            description: 'Erro interno do servidor',
+            schema: { $ref: "#/definitions/exerciseFindAllByPatient500" }
+        } */
+
         try {
-            const { pac_nome } = req.body
+            const { pac_nome } = req.params
             const patientData = !pac_nome ? '' : await Pacientes.findAll({ where: {
                 pac_nome: {
                     [Op.iLike]: `%${pac_nome}%`
@@ -88,6 +134,42 @@ class ExercicioController {
     }
   
     async update(req, res) {
+
+        // #swagger.tags = ['Exercícios']
+        // #swagger.summary = 'Atualizar um exercício'
+        // #swagger.description = 'Endpoint para atualizar um exercício pelo ID.'
+        /* #swagger.parameters['exercicioId'] = {in: 'path', type: 'integer', description: 'ID do exercício a ser atualizado.'} */
+        /* #swagger.parameters["body"] = { 
+            in: "body",
+            description: "Dados de atualização do exercício",
+            type: "object",
+            schema: {
+            exe_nome: "Nome do Exercício Atualizado",
+            exe_data: "Data do Exercício Atualizada",
+            exe_hora: "Hora do Exercício Atualizada",
+            exe_tipo: "Tipo do Exercício Atualizado",
+            exe_descricao: "Descrição do Exercício Atualizada",
+            exe_qtd: 2
+            },
+            required: true
+        } */
+        /* #swagger.responses[201] = { 
+            description: 'Exercício atualizado com sucesso',
+            schema: { $ref: "#/definitions/exerciseUpdate201" }
+        } */
+        /* #swagger.responses[400] = { 
+            description: 'Requisição inválida, dados de exercício ausentes ou inválidos',
+            schema: { $ref: "#/definitions/exerciseUpdate400" }
+        } */
+        /* #swagger.responses[404] = { 
+            description: 'Exercício não encontrado',
+            schema: { $ref: "#/definitions/exerciseUpdate404" }
+        } */
+        /* #swagger.responses[500] = { 
+            description: 'Erro interno do servidor',
+            schema: { $ref: "#/definitions/exerciseUpdate500" }
+        } */
+
         try {    
           const { exercicioId } = req.params;
           const exercicio = await Exercicios.findByPk(exercicioId);
@@ -145,6 +227,32 @@ class ExercicioController {
     }
 
     async remove(req, res) {
+
+        // #swagger.tags = ['Exercícios']
+        // #swagger.summary = 'Remover um exercício'
+        // #swagger.description = 'Endpoint para remover um exercício pelo ID.'
+        /* #swagger.parameters['exercicioId'] = {in: 'path', type: 'integer', description: 'ID do exercício a ser removido.'} */
+        /* #swagger.parameters["body"] = { 
+            in: "body",
+            description: "Dados de confirmação para remover o exercício",
+            type: "object",
+            schema: {
+            id: 2
+            },
+            required: true
+        } */
+        /* #swagger.responses[200] = { 
+            description: 'Exercício removido com sucesso'
+        } */
+        /* #swagger.responses[400] = { 
+            description: 'Requisição inválida, dados de remoção ausentes ou inválidos',
+            schema: { $ref: "#/definitions/exerciseRemove400" }
+        } */
+        /* #swagger.responses[500] = { 
+            description: 'Erro interno do servidor',
+            schema: { $ref: "#/definitions/exerciseRemove500" }
+        } */
+
         try {
             const { exercicioId } = req.params;
 
@@ -168,6 +276,19 @@ class ExercicioController {
     }
 
     async findAllAdmin(req, res) {
+
+        // #swagger.tags = ['Exercícios']
+        // #swagger.summary = 'Listar todos os exercícios (Admin)'
+        // #swagger.description = 'Endpoint para listar todos os exercícios cadastrados, incluindo os arquivados (Admin).'
+        /* #swagger.responses[200] = { 
+            description: 'Lista de todos os exercícios cadastrados (Admin)',
+            schema: { $ref: "#/definitions/exerciseFindAllAdmin200" }
+        } */
+        /* #swagger.responses[500] = { 
+            description: 'Erro interno do servidor',
+            schema: { $ref: "#/definitions/exerciseFindAllAdmin500" }
+        } */
+
       try {
           const exercicios = await exercicios.findAll({ paranoid: false })
 
