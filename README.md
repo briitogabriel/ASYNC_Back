@@ -32,6 +32,8 @@ O objetivo principal é oferecer uma plataforma que simplifique processos de ate
 4. Crie o banco de dados com o comando: `db:migrate`
 4. Insira os dados padrões no banco de dados com o comando: `db:seed`
 5. Inicie o projeto com o comando: `npm run dev`
+6. Caso seja trocada a porta padrão (3333), executar o comando para atualizar a documentação Swagger: `npm run swagger-autogen`
+7. A documentação Swagger dos endpoints pode ser consultada em: http://localhost:3333/api/docs/
 
 ## Uso
 
