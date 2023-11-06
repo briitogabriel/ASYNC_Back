@@ -29,15 +29,16 @@ O objetivo principal é oferecer uma plataforma que simplifique processos de ate
 1. Clone o repositório: `git@github.com:FullStack-Trindade/M3P-BackEnd-Squad4.git`
 2. Acesse o diretório do projeto: `cd M3P-BackEnd-Squad4`
 3. Instale as dependências: `npm install`
-4. Crie o banco de dados com o comando: `db:migrate`
-4. Insira os dados padrões no banco de dados com o comando: `db:seed`
-5. Inicie o projeto com o comando: `npm run dev`
-6. Caso seja trocada a porta padrão (3333), executar o comando para atualizar a documentação Swagger: `npm run swagger-autogen`
-7. A documentação Swagger dos endpoints pode ser consultada em: http://localhost:3333/api/docs/
+4. Crie o banco de dados com o comando: `npx sequelize-cli db:migrate`
+4. Insira os dados padrões no banco de dados com o comando: `npx sequelize-cli db:seed:all`
+5. Caso seja trocada a porta padrão (3333), executar o comando para atualizar a documentação Swagger: `npm run swagger-autogen`
+6. Renomeie o arquivo `.env.example` para `.env` e insira as credencias de acesso ao banco de dados e configurações de rota conforme preferência
+7. Inicie o projeto com o comando: `npm run dev`
+8. A documentação Swagger dos endpoints pode ser consultada em: http://localhost:3333/api/docs/
 
 ## Uso
 
-Após a instalação e configuração, a api estará disponível na URL: http://localhost:3333
+Após a instalação e configuração, a api estará disponível na URL: http://localhost:3333/api
 
 ## Melhorias a serem aplicadas
 - Deveríamos implementar a inclusão da Foto do paciente para agilizar atendimentos emergenciais em que o paciente não estivesse responsivo;
