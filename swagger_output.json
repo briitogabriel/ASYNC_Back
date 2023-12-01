@@ -5,7 +5,7 @@
     "title": "ASYNC Lab API",
     "description": "Documentação da <b>SQUAD4 - ASYNC</b>, gerada automaticamente com <b>swagger-autogen</b>"
   },
-  "host": "localhost:3333",
+  "host": "async-vuv3.onrender.com",
   "basePath": "/api/",
   "tags": [
     {

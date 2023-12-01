@@ -10,7 +10,7 @@ const docDefinition = {
     title: "ASYNC Lab API",
     description: "Documentação da <b>SQUAD4 - ASYNC</b>, gerada automaticamente com <b>swagger-autogen</b>"
   },
-  host: `${process.env.APP_PROD_HOST}`,
+  host: `${process.env.APP_PORT}`,
   basePath: "/api/",
   schemes: ['http', 'https'],
   consumes: ['application/json'],
