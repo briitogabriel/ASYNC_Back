@@ -2733,7 +2733,7 @@
     }
   },
   "definitions": {
-    "userLogin200": {
+    "usuarioLogin200": {
       "type": "object",
       "properties": {
         "message": {
@@ -2759,7 +2759,7 @@
         }
       }
     },
-    "userLogin400": {
+    "usuarioLogin400": {
       "type": "object",
       "properties": {
         "message": {
@@ -2773,7 +2773,7 @@
         }
       }
     },
-    "userLogin401": {
+    "usuarioLogin401": {
       "type": "object",
       "properties": {
         "message": {
@@ -2782,7 +2782,7 @@
         }
       }
     },
-    "userLogin404": {
+    "usuarioLogin404": {
       "type": "object",
       "properties": {
         "message": {
@@ -2791,7 +2791,7 @@
         }
       }
     },
-    "userLogin500": {
+    "usuarioLogin500": {
       "type": "object",
       "properties": {
         "message": {

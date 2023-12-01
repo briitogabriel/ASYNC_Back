@@ -40,6 +40,10 @@ O objetivo principal é oferecer uma plataforma que simplifique processos de ate
 
 Após a instalação e configuração, a api estará disponível na URL: http://localhost:3333/api
 
+## TESTE
+
+Você pode testar a API em produção aqui: https://async-vuv3.onrender.com/api/docs/#/
+
 ## Melhorias a serem aplicadas
 - Deveríamos implementar a inclusão da Foto do paciente para agilizar atendimentos emergenciais em que o paciente não estivesse responsivo;
 - Juntamente com a foto, implementar uma busca por reconhecimento facial onde pudesse ser usado um scanner pra buscar no sistema o paciente a ser atendido;
